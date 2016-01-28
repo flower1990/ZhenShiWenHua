@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{860456C4-875C-4470-B474-B9D093A11AFD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HanHe.BLL</RootNamespace>
+    <AssemblyName>HanHe.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseService.cs" />
+    <Compile Include="BZs_User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BZs_ChuanJia.cs" />
+    <Compile Include="BZs_ChuanJiaAtt.cs" />
+    <Compile Include="BZs_ChuanJiaComment.cs" />
+    <Compile Include="BZs_Department.cs" />
+    <Compile Include="BZs_Dic.cs" />
+    <Compile Include="BZs_FavoritesInfo.cs" />
+    <Compile Include="BZs_FCAtt.cs" />
+    <Compile Include="BZs_FCBlack.cs" />
+    <Compile Include="BZs_FCComment.cs" />
+    <Compile Include="BZs_FCircle.cs" />
+    <Compile Include="BZs_FGroup.cs" />
+    <Compile Include="BZs_Friend.cs" />
+    <Compile Include="BZs_GanWu.cs" />
+    <Compile Include="BZs_GanWuAtt.cs" />
+    <Compile Include="BZs_GanWuComment.cs" />
+    <Compile Include="BZs_GuoXue.cs" />
+    <Compile Include="BZs_GuoXueAtt.cs" />
+    <Compile Include="BZs_GuoXueComment.cs" />
+    <Compile Include="BZs_Keywords.cs" />
+    <Compile Include="BZs_Member.cs" />
+    <Compile Include="BZs_MemorialDay.cs" />
+    <Compile Include="BZs_NewFriend.cs" />
+    <Compile Include="BZs_Product.cs" />
+    <Compile Include="BZs_ProductAtt.cs" />
+    <Compile Include="BZs_Project.cs" />
+    <Compile Include="BZs_ProjectAtt.cs" />
+    <Compile Include="BZs_ProjectClock.cs" />
+    <Compile Include="BZs_ProjectComment.cs" />
+    <Compile Include="BZs_Right.cs" />
+    <Compile Include="BZs_Role.cs" />
+    <Compile Include="BZs_RoleUser.cs" />
+    <Compile Include="BZs_SetNotice.cs" />
+    <Compile Include="BZs_SetPrivacy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HanHe.DAL\HanHe.DAL.csproj">
+      <Project>{13bfd618-aa30-4005-a226-bfe791b1cd6c}</Project>
+      <Name>HanHe.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HanHe.IBLL\HanHe.IBLL.csproj">
+      <Project>{f9ea479b-05ba-43c7-aca8-eabb75911a74}</Project>
+      <Name>HanHe.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HanHe.IDAL\HanHe.IDAL.csproj">
+      <Project>{bbc6ace0-2add-490c-88b7-aea9919533be}</Project>
+      <Name>HanHe.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HanHe.Model\HanHe.Model.csproj">
+      <Project>{403e5974-1e1b-4883-b27a-2cec1d5e0ce4}</Project>
+      <Name>HanHe.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HanHe.Util\HanHe.Util.csproj">
+      <Project>{1651ec00-00fd-4f04-8e57-aaeff99a5fef}</Project>
+      <Name>HanHe.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

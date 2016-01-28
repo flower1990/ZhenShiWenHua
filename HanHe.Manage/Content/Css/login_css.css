@@ -1,0 +1,157 @@
+body, p, img, a, div, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, br, table, td, form, input {
+    margin: 0;
+    padding: 0;
+}
+
+table, ul, li, img {
+    list-style: none;
+    border: 0;
+}
+
+textarea {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+    resize: none; /* extarea在Safari和Chrome中禁用调整大小功能 */
+}
+/*针对后台编辑器的内容，列表项*/
+.editing ol {
+    list-style-type: decimal;
+}
+
+    .editing ol li {
+        list-style-type: decimal;
+    }
+
+.editing ul {
+    list-style-type: disc;
+}
+
+    .editing ul li {
+        list-style-type: disc;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th, td {
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+}
+
+    a:active {
+        star: expression(this.onFocus=this.blur());
+    }
+
+:focus {
+    outline: 0;
+}
+
+/*frame*/
+body {
+    font-size: 12px;
+    font-family: arial;
+    width: 100%;
+    font-family: "宋体";
+    color: #202020;
+    background: #033678;
+}
+
+.login_main {
+    background: url(../Image/login_bg.jpg) no-repeat 0px 0px;
+    WIDTH: 980px;
+    HEIGHT: 628px;
+    margin: 0 auto;
+}
+
+.login_top {
+    width: 550px;
+    margin: 0 auto;
+    text-align: left;
+    height: 138px;
+    padding-top: 124px;
+    margin-bottom: 40px;
+}
+
+    .login_top h1 {
+        height: 138px;
+        line-height: 138px;
+        font-size: 28px;
+        color: #fff;
+        padding-left: 42px;
+    }
+
+.login_bottom {
+    width: 550px;
+    margin: 0 auto;
+    height: 156px;
+}
+
+.login_con {
+    width: 550px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.login_left {
+    width: 260px;
+    height: 125px;
+    float: left;
+    display: inline;
+}
+
+.login_right {
+    width: 280px;
+    height: 125px;
+    float: right;
+    display: inline;
+    color: #09539C;
+}
+
+.login_copy {
+    clear: both;
+    color: #999;
+    padding: 10px;
+}
+
+.input_login_a {
+    width: 163px;
+    height: 19px;
+    line-height: 19px;
+    background: #F5FAFE;
+    border: 1px solid #7A96AE;
+}
+
+.input_login_b {
+    width: 59px;
+    height: 19px;
+    line-height: 19px;
+    background: #F5FAFE;
+    border: 1px solid #7A96AE;
+}
+
+.code_login {
+    border: 1px solid #7A96AE;
+    vertical-align: middle;
+}
+
+.btn_login {
+    width: 53px;
+    height: 27px;
+    line-height: 27px;
+    border: 0px;
+    background: url(../Image/btn_bg.png) no-repeat 0px 0px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+    .btn_login:hover {
+        background: url(../Image/btn_bg_on.png) no-repeat 0px 0px;
+    }

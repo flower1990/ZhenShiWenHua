@@ -1,0 +1,137 @@
+﻿@model HanHe.Model.Zs_User
+
+@{
+    ViewBag.Title = "添加用户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Ajax.BeginForm("UserAdd", "User", new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "content" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserNameCn, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.UserNameCn, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.UserNameCn)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserNameEn, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.UserNameEn, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.UserNameEn)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoginName, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.LoginName, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.LoginName)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pwd, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Pwd, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.Pwd)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleID, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.RoleID, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.RoleID)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Mobile, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.Mobile)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.QQ, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.QQ, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.QQ)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.WeiXin, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.WeiXin, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.WeiXin)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserChar, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.UserChar)
+                @Html.ValidationMessageFor(model => model.UserChar)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserStatus, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.UserStatus, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.UserStatus)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserStatusName, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.UserStatusName)
+                @Html.ValidationMessageFor(model => model.UserStatusName)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.CreateDate, htmlAttributes: new { @class = "col-xs-10 col-sm-5", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.CreateDate)
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="button">
+                    <i class="icon-ok bigger-110"></i>
+                    Submit
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

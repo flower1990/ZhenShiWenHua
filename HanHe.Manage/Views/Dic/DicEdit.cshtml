@@ -1,0 +1,152 @@
+﻿@model HanHe.Manage.Models.Dic.DicEdit
+@{
+    ViewBag.Title = "编辑字典";
+    ViewBag.Elements = "编辑字典";
+    ViewBag.Forms = "字典列表";
+    ViewBag.FormsUrl = Url.Action("DicList", "Dic");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .ui-jqgrid tr.jqgrow td {
+        border: 0px none;
+    }
+</style>
+
+@using (Html.BeginForm("DicEdit", "Dic", method: FormMethod.Post, htmlAttributes: new { id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.DicID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DicCode, new { @class = "col-sm-3 control-label no-padding-right" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.DicCode, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.DicCode, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DicName, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.DicName, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.DicName, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DicNameEn, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.DicNameEn, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.DicNameEn, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DicProperty, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <select class="col-xs-10 col-sm-5" id="DicProperty">
+                    <option value="0">数据属性</option>
+                    <option value="1">栏目属性</option>
+                </select>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SortID, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.SortID, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5" } })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remark, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.Remark, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.Remark, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    提交
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <div class="hr hr-24"></div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var grid_selector = "#grid-table";
+            var pager_selector = "#grid-pager";
+
+            jQuery(grid_selector).jqGrid({
+                url: '@Url.Action("GetData", "Dic")',
+                mtype: 'GET',
+                colNames: ['编号', '字典名称', 'lft', 'rgt', 'level', 'uiicon'],
+                colModel: [
+                    { name: 'DicID', index: 'DicID', hidden: true, key: true, width: 90, label: "DicID" },
+                    { name: 'DicName', index: 'DicName', width: 150, label: "DicName", sorttype: "string" },
+                    { name: 'lft', hidden: true },
+                    { name: 'rgt', hidden: true },
+                    { name: 'level', hidden: true },
+                    { name: 'uiicon', hidden: true },
+                ],
+                datatype: "json",
+                hoverrows: false,
+                viewrecords: false,
+                gridview: true,
+                height: 100,
+                width: 350,
+                sortname: 'lft',
+                loadonce: true,
+                rowNum: 100,
+                scrollrows: true,
+                treeGrid: true,
+                ExpandColumn: 'DicName',
+                ExpandColClick: true,
+                treedatatype: 'json',
+                treeGridModel: 'nested',
+                sortorder: 'asc',
+                multiselect: true,
+                loadComplete: function () {
+                    var table = this;
+                    setTimeout(function () {
+                        styleCheckbox(table);
+                        updateActionIcons(table);
+                        updatePagerIcons(table);
+                        enableTooltips(table);
+                    }, 0);
+                    $(grid_selector).setSelection(1);
+                },
+                onSelectRow: function () {
+                    var selr = jQuery(grid_selector).jqGrid('getGridParam', 'selrow');
+                    $('#ParentID').val(selr);
+                }
+            });
+
+            $('.ui-jqgrid-htable', '.ui-jqgrid-hbox').hide();
+        });
+    </script>
+}

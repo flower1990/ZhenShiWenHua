@@ -1,0 +1,66 @@
+﻿@model HanHe.Manage.Models.LoginViewModel
+@{
+    ViewBag.Title = "登录";
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>后台管理</title>
+    <meta http-equiv=Content-Type content="text/html; charset=gb2312" />
+    @Styles.Render("~/Content/Css/login_css.css")
+</head>
+<body>
+@using (Html.BeginForm("Login", "User", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="login_main">
+        <div class="login_top">
+            <h1>网站管理系统</h1>
+        </div>
+        <div class="login_con">
+            <div class="login_left"><img src="@Url.Content("~/Content/Image/login_img.jpg")" width="252" height="114" /></div>
+            <div class="login_right">
+                <table>
+                    @Html.ValidationSummary(true)
+                    <tr>
+                        <td height="30">用户名：</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.Account, new { @class = "input_login_a" })
+                            @Html.ValidationMessageFor(model => model.Account)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">密 码：</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.Password, new { @class = "input_login_a" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">验证码：</td>
+                        <td>
+                            @Html.CheckBoxFor(model => model.RememberMe, new { @class = "input_login_b" })
+                            <img src="@Url.Content("~/Content/Image/code.jpg")" width="47" height="19" class="code_login" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="40"></td>
+                        <td valign="bottom">
+                            <input type="submit" class="btn_login" value="登 录" />
+                            <input type="button" class="btn_login" value="退 出" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <p class="login_copy">copyright &copy;2014 all rights reserved</p>
+        </div>
+        <div class="login_bottom"></div>
+    </div>
+ }
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
