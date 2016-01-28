@@ -6,6 +6,7 @@ using HanHe.Manage.Models.Helpers;
 using HanHe.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,7 +16,7 @@ namespace HanHe.Manage.Controllers
     public class GuoXueController : Controller
     {
         SysFun sysFun = new SysFun();
-        IZs_GuoXue bMember = new BZs_GuoXue();
+        IZs_GuoXue bGuoXue = new BZs_GuoXue();
 
         public SelectList GetCategory01List(int selectedValue)
         {
@@ -49,7 +50,7 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         public JsonResult GetData(GridSettings grid)
         {
-            var query = bMember.Entities;
+            var query = bGuoXue.Entities;
 
             //filtring
             query = GridFilter.Filtring<Zs_GuoXue>(grid, query);
@@ -121,11 +122,57 @@ namespace HanHe.Manage.Controllers
             item = sysFun.InitialEntity<GuoXueCreate, Zs_GuoXue>(model, item);
             item.UpdateDate = DateTime.Now;
             item.PublishDate = DateTime.Now;
-            item = bMember.Add(item);
+            item = bGuoXue.Add(item);
 
             if (item.GxID > 0) return RedirectToAction("GuoXueList");
 
             return View(model);
+        }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GuoXueEdit(int id = 0)
+        {
+            var item = bGuoXue.Find(id);
+            var model = new GuoXueEdit();
+            model = sysFun.InitialEntity<Zs_GuoXue, GuoXueEdit>(item, model);
+            
+            return View(model);
+        }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GuoXueEdit(GuoXueEdit model)
+        {
+            if (!ModelState.IsValid) { return View(model); }
+
+            Zs_GuoXue item = bGuoXue.Find(model.GxID);
+            item = sysFun.InitialEntity<GuoXueEdit, Zs_GuoXue>(model, item);
+            var result = bGuoXue.Update(item);
+
+            if (result) return RedirectToAction("GuoXueList");
+            else return View(model);
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult GuoXueDelete(int id)
+        {
+            string sql = "exec SP_DicDelete @DicID";
+            SqlParameter[] param = new SqlParameter[]
+            {
+                new SqlParameter("@DicID", id),
+            };
+
+            var result = bGuoXue.Delete(sql, param);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
