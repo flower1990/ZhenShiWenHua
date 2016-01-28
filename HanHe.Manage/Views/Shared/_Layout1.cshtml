@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 后台管理系统</title>
+
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="manage_top">
+        <div class="system_logo">
+            <img src="@Url.Content("~/Content/Image/logo.png")" width="328" height="77" />
+        </div>
+    </div>
+    <div class="manage_main">
+        <table width="98%" class="manage_main_table">
+            <tbody>
+                <tr>
+                    <td width="232" align="middle" valign="top" class="main_left" id="frmTitle" name="fmTitle">
+                        <div class="box" id="box_left_menu">
+                            <div class="box_top f_white">功能菜单</div>
+                            <div class="box_main">
+                                <div class="left_menu font_a">
+                                    @Html.Partial("~/Views/Menu/LeftMenu.cshtml")
+                                </div>
+                            </div>
+                            <div class="box_bottom"></div>
+                        </div>
+                        <div class="box" id="box_left_state">
+                            <div class="box_top f_white"><span class="f_btn">-</span>用户状态</div>
+                            <div class="box_main">
+                                <table width="100%">
+                                    <tr>
+                                        <td width="36%" height="26" align="right">用户名：</td>
+                                        <td width="64%" align="left">zhangjinzhu</td>
+                                    </tr>
+                                    <tr>
+                                        <td height="26" align="right">用户角色：</td>
+                                        <td align="left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="26" colspan="2" align="left" class="f_blue"><span class="mar_2L mar_2R">修改密码</span> <span class="mar_2L">退出系统</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="box_bottom"></div>
+                        </div>
+                    </td>
+                    <td width="10">
+                        <table height="100%">
+                            <tbody>
+                                <tr>
+                                    <td style="HEIGHT: 100%" onclick="switchSysBar()"><span class="btn" id="switchPoint" title="关闭/打开左栏"> <img src="@Url.Content("~/Content/Image/right.gif")" /></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="main_right" valign="top">
+                        <table width="100%">
+                            <tr>
+                                <td width="10" height="24"><img src="@Url.Content("~/Content/Image/box_lt.png")" width="10" height="24" /></td>
+                                <td class="tit f_white">信息操作与显示窗口</td>
+                                <td width="10"><img src="@Url.Content("~/Content/Image/box_rt.png")" width="10" height="24" /></td>
+                            </tr>
+                            <tr>
+                                <td class="t_main_l"></td>
+                                <td class="t_main">
+                                    <div class="content">
+                                        <div class="main_iframe">
+                                            @RenderBody()
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="t_main_r"></td>
+                            </tr>
+                            <tr>
+                                <td width="10" height="13"><img src="@Url.Content("~/Content/Image/box_lb.png")" width="10" height="13" /></td>
+                                <td class="t_bottom"></td>
+                                <td><img src="@Url.Content("~/Content/Image/box_rb.png")" width="10" height="13" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/manage")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

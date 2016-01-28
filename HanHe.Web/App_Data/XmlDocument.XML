@@ -1,0 +1,1629 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HanHe.Web</name>
+    </assembly>
+    <members>
+        <member name="T:HanHe.Web.MultipartFormDataMemoryStreamProvider">
+            <summary>
+            与MultipartFormDataStreamProvider对应,但不将文件直接存入指定位置，而是需要自己指定数据流如何保存
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.MultipartFormDataMemoryStreamProvider.UnquoteToken(System.String)">
+            <summary>
+            复制自 System.Net.Http.FormattingUtilities 下同名方法，因为该类为internal，不能在其它命名空间下被调用
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="P:HanHe.Web.MultipartFormDataMemoryStreamProvider.FileContents">
+            <summary>
+            获取文件对应的HttpContent集合,文件如何读取由实际使用方确定，可以ReadAsByteArrayAsync，也可以ReadAsStreamAsync
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.MultipartFormDataMemoryStreamProvider.FormData">
+            <summary>Gets a <see cref="T:System.Collections.Specialized.NameValueCollection" /> of form data passed as part of the multipart form data.</summary>
+            <returns>The <see cref="T:System.Collections.Specialized.NameValueCollection" /> of form data.</returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetFormData(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            获取表单数据
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.UploadImage(System.Int32,System.Net.Http.HttpRequestMessage)">
+            <summary>
+            上传图片
+            </summary>
+            <param name="fileType"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.InitialEntity``1(``0,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            初始化实体类
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <param name="dic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.InitialEntity``2(``0,``1)">
+            <summary>
+            初始化实体类
+            </summary>
+            <typeparam name="S">源类型</typeparam>
+            <typeparam name="T">目标类型</typeparam>
+            <param name="s">源实体</param>
+            <param name="t">目标实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetMapperProperties(System.Type,System.Type)">
+            <summary>
+            获取映射器属性
+            </summary>
+            <param name="sourceType">源类型</param>
+            <param name="targetType">目标类型</param>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetDestDir(System.String)">
+            <summary>
+            获取文件存放目录
+            </summary>
+            <param name="fileType">1.图片2.视频3.音频4.文档5.flash</param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetVirtualDir(System.String)">
+            <summary>
+            获取文件虚拟目录
+            </summary>
+            <param name="fileType">1.图片2.视频3.音频4.文档5.flash</param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetValue(System.String,System.Type)">
+            <summary>
+            初始化值
+            </summary>
+            <param name="value"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.IsBaseType(System.Type)">
+            <summary>
+            判断是否基本数据类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetFileType(System.String)">
+            <summary>
+            获取文件类型
+            </summary>
+            <param name="orfilename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.GetFileTitle(System.String)">
+            <summary>
+            获取文件类型
+            </summary>
+            <param name="orfilename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.SysFun.DeleteFile(System.Int32,System.String)">
+            <summary>
+            删除本地附件
+            </summary>
+            <param name="attType">附件类型</param>
+            <param name="attUrl">附件地址</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:HanHe.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,HanHe.Web.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,HanHe.Web.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:HanHe.Web.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},HanHe.Web.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:HanHe.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:HanHe.Web.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:HanHe.Web.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(HanHe.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:HanHe.Web.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,HanHe.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:HanHe.Web.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:HanHe.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HanHe.Web.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HanHe.Web.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:HanHe.Web.Controllers.ChuanJiaAttController">
+            <summary>
+            传家有道附件
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaAttController.AddOrUpdateChuanJiaAtt">
+            <summary>
+            添加或更新附件（添加传MID，更新传AttID）
+            </summary>
+            <returns>附件信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaAttController.DeleteProjectAtt(System.String)">
+            <summary>
+            删除附件
+            </summary>
+            <param name="id">附件编号</param>
+            <returns>删除结果0：失败，1：成功</returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.ChuanJiaController">
+            <summary>
+            传家有道
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.GetAttUrl(System.Int64)">
+            <summary>
+            获取附件地址
+            </summary>
+            <param name="projectID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.UpdateAttList(HanHe.Model.Zs_ChuanJia)">
+            <summary>
+            更新附件列表
+            </summary>
+            <param name="chuanjia">传家信息</param>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.AddChuanJia(HanHe.Web.Models.AddChuanJiaModel)">
+            <summary>
+            添加传家有道
+            </summary>
+            <param name="model">传家有道信息</param>
+            <returns>传家有道信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.UpdateChuanJia(HanHe.Web.Models.UpdateChuanJiaModel)">
+            <summary>
+            修改传家有道
+            </summary>
+            <param name="model">传家有道信息</param>
+            <returns>传家有道信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.DeleteChuanJia(System.Int64)">
+            <summary>
+            删除传家有道
+            </summary>
+            <param name="id">传家编号</param>
+            <returns>删除结果0：失败，1：成功</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.GetChuanJiaAll(System.Int64)">
+            <summary>
+            获取传家有道列表
+            </summary>
+            <param name="mid">会员编号</param>
+            <returns>传家有道信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.GetChuanJiaById(System.Int64)">
+            <summary>
+            根据传家ID查找
+            </summary>
+            <param name="id">传家有道编号</param>
+            <returns>传家有道信息和附件列表</returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.GanWuAttController">
+            <summary>
+            感悟未来附件
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuAttController.AddOrUpdateGanWuAtt">
+            <summary>
+            添加或更新附件（添加传MID，更新传AttID）
+            </summary>
+            <returns>附件信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuAttController.DeleteProjectAtt(System.String)">
+            <summary>
+            删除附件
+            </summary>
+            <param name="id">附件编号</param>
+            <returns>删除结果0：失败，1：成功</returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.GanWuController">
+            <summary>
+            感悟未来
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.GetAttUrl(System.Int64)">
+            <summary>
+            获取附件地址
+            </summary>
+            <param name="projectID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.UpdateAttList(HanHe.Model.Zs_GanWu)">
+            <summary>
+            更新附件列表
+            </summary>
+            <param name="ganWu"></param>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.AddGanWu(HanHe.Web.Models.AddGanWuModel)">
+            <summary>
+            添加感悟未来
+            </summary>
+            <param name="model">感悟未来信息</param>
+            <returns>感悟未来和附件信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.UpdateGanWu(HanHe.Web.Models.UpdateGanWuModel)">
+            <summary>
+            修改感悟未来
+            </summary>
+            <returns>感悟未来和附件信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.DeleteGanWu(System.Int64)">
+            <summary>
+            删除感悟未来
+            </summary>
+            <param name="id">感悟未来编号</param>
+            <returns>删除结果0：失败，1：成功</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.GetGanWuAll(System.Int64)">
+            <summary>
+            获取感悟未来列表
+            </summary>
+            <param name="mid">会员编号</param>
+            <returns>感悟未来和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.GetGanWuById(System.Int64)">
+            <summary>
+            获取感悟未来详情
+            </summary>
+            <param name="id">感悟未来编号</param>
+            <returns>感悟未来和附件信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.HomeController.Login">
+            <summary>
+            登陆
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.HomeController.Register">
+            <summary>
+            注册
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.HomeController.MemberDetail">
+            <summary>
+            完善信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.MainController">
+            <summary>
+            系统主界面
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MainController.Index(System.Int64)">
+            <summary>
+            主界面接口
+            </summary>
+            <param name="mid">会员编号</param>
+            <returns></returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.MemberController">
+            <summary>
+            会员信息
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.Login(HanHe.Web.Models.LoginModel)">
+            <summary>
+            账户登录
+            </summary>
+            <param name="model">登录信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.LoginByQQ(HanHe.Web.Models.LoginByQQModel)">
+            <summary>
+            QQ登录
+            </summary>
+            <param name="model">登录信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.LoginByWeiXin(HanHe.Web.Models.LoginByWeiXinModel)">
+            <summary>
+            微信登录
+            </summary>
+            <param name="model">登录信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.LoginBySina(HanHe.Web.Models.LoginBySinaModel)">
+            <summary>
+            新浪登录
+            </summary>
+            <param name="model">登录信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.RegisterByMobile(HanHe.Web.Models.RegisterMobileModel)">
+            <summary>
+            手机注册
+            </summary>
+            <param name="model">注册信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.RegisterByEmail(HanHe.Web.Models.RegisterEmailModel)">
+            <summary>
+            邮箱注册
+            </summary>
+            <param name="model">注册信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.UpdateMember(HanHe.Web.Models.UpdateMemberModel)">
+            <summary>
+            完善会员资料
+            </summary>
+            <param name="model">会员信息</param>
+            <returns>会员信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.GetVerificationCode(System.String)">
+            <summary>
+            获取验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <returns>手机号和验证码</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.ValVerificationCode(System.String,System.String)">
+            <summary>
+            验证验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns></returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.ProjectAttController">
+            <summary>
+            行事历附件
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectAttController.AddOrUpdateProjectAtt">
+            <summary>
+            添加或更新附件（添加传MID，更新传AttID）
+            </summary>
+            <returns>附件信息</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectAttController.DeleteProjectAtt(System.String)">
+            <summary>
+            删除附件
+            </summary>
+            <param name="id">附件编号</param>
+            <returns></returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.ProjectController">
+            <summary>
+            行事历
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.GetAttUrl(System.Int64)">
+            <summary>
+            获取附件地址
+            </summary>
+            <param name="projectID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.UpdateAttList(HanHe.Model.Zs_Project)">
+            <summary>
+            更新附件列表
+            </summary>
+            <param name="project">事例信息</param>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.AddProject(HanHe.Web.Models.AddProjectModel)">
+            <summary>
+            添加事历
+            <param name="model">事历信息</param>
+            </summary>
+            <returns>事历信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.UpdateProject(HanHe.Web.Models.UpdateProjectModel)">
+            <summary>
+            修改事历
+            </summary>
+            <param name="model">事历信息</param>
+            <returns>事历信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.DeleteProject(System.Int64)">
+            <summary>
+            删除事历
+            </summary>
+            <param name="id">事历编号</param>
+            <returns>删除结果0：失败，1：成功</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.GetProjectAll(System.Int64)">
+            <summary>
+            获取事历列表
+            </summary>
+            <param name="mid">会员编号</param>
+            <returns>事历信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.GetProjectById(System.Int64)">
+            <summary>
+            获取详情信息
+            </summary>
+            <param name="id">事历编号</param>
+            <returns>事历信息和附件列表</returns>
+        </member>
+        <member name="T:HanHe.Web.Models.ChuanJiaAttModel">
+            <summary>
+            传家有道事历附件
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.AttID">
+            <summary>
+            附件编号（更新附件必填）
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.MID">
+            <summary>
+            会员编号（添加附件必填）
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.CJID">
+            <summary>
+            传家有道编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.AttTitle">
+            <summary>
+            附件标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.AttInfo">
+            <summary>
+            附件说明
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.AttUrl">
+            <summary>
+            附件Url
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAttModel.AttType">
+            <summary>
+            附件类型
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.AddChuanJiaModel">
+            <summary>
+            传家有道
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.TypeID">
+            <summary>
+            传家类别：1.墓志铭2.家训3.遗训4.文化传承；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.CJTitle">
+            <summary>
+            传家标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.CJTitleShort">
+            <summary>
+            短标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.CJInfo">
+            <summary>
+            传家内容
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.OpenStatus">
+            <summary>
+            公开状态：0、私隐；1、公开；2、好友可见
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddChuanJiaModel.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.UpdateChuanJiaModel">
+            <summary>
+            传家有道
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.CJID">
+            <summary>
+            传家有道编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.TypeID">
+            <summary>
+            传家类别：1.墓志铭2.家训3.遗训4.文化传承；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.CJTitle">
+            <summary>
+            传家标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.CJTitleShort">
+            <summary>
+            短标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.CJInfo">
+            <summary>
+            传家内容
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.OpenStatus">
+            <summary>
+            公开状态：0、私隐；1、公开；2、好友可见
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.AttID">
+            <summary>
+            附件编号（更新附件必填）
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.MID">
+            <summary>
+            会员编号（添加附件必填）
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.GWID">
+            <summary>
+            感悟未来编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.AttTitle">
+            <summary>
+            附件标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.AttInfo">
+            <summary>
+            附件说明
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.AttUrl">
+            <summary>
+            附件Url
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.GanWuAttModel.AttType">
+            <summary>
+            附件类型
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.GanWuViewModel">
+            <summary>
+            感悟未来
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.AddGanWuModel">
+            <summary>
+            添加感悟未来
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.MID">
+            <summary>
+            会员编号
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.GwTitle">
+            <summary>
+            感悟标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.GwTitleShort">
+            <summary>
+            感悟短标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.GwInfo">
+            <summary>
+            感悟内容
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.GwType">
+            <summary>
+            感悟类别：1、感悟；2、梦想心愿；3、大事；4、未来的信；5、杂谈；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.OpenStatus">
+            <summary>
+            公开状态：0、私隐；1、公开；2、好友可见
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.GotoDate">
+            <summary>
+            未来日期：未来的信寄达日期，梦想心愿的实现日期
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.PostDate">
+            <summary>
+            寄送日期
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.GwStatus">
+            <summary>
+            状态：0、初始；1、提交；2、送达；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.SmsStatus">
+            <summary>
+            短信提醒状态：0、不发短信；1、发送短信，缺省值；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddGanWuModel.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.UpdateGanWuModel">
+            <summary>
+            更新感悟未来
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GwID">
+            <summary>
+            感悟编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GwTitle">
+            <summary>
+            感悟标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GwTitleShort">
+            <summary>
+            感悟短标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GwInfo">
+            <summary>
+            感悟内容
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GwType">
+            <summary>
+            感悟类别：1、感悟；2、梦想心愿；3、大事；4、未来的信；5、杂谈；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.OpenStatus">
+            <summary>
+            公开状态：0、私隐；1、公开；2、好友可见
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GotoDate">
+            <summary>
+            未来日期：未来的信寄达日期，梦想心愿的实现日期
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.PostDate">
+            <summary>
+            寄送日期
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.GwStatus">
+            <summary>
+            状态：0、初始；1、提交；2、送达；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.SmsStatus">
+            <summary>
+            短信提醒状态：0、不发短信；1、发送短信，缺省值；
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateGanWuModel.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.UpdateMemberModel">
+            <summary>
+            完善资料
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.MName">
+            <summary>
+            真实姓名，2-50位中英文字符，不含特殊字符
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.NickName">
+            <summary>
+            昵称，2-18位中英文、数字、下划线
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Sex">
+            <summary>
+            性别：1、先生；0、女士
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Privacy">
+            <summary>
+            隐私是否公开，例0-仅限自己，1-公开
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Career">
+            <summary>
+            职业，例0-雇员，1-自由职业，2-企业主，3-投资人
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.City">
+            <summary>
+            城市，国别-省份-城市-县区
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.IDType">
+            <summary>
+            证件类别，来源于数据字典
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.IDCode">
+            <summary>
+            证件编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.BirthdayCn">
+            <summary>
+            阴历生日
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.BirthdayEn">
+            <summary>
+            阳历生日，计算生命倒计时用
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.CalendarType">
+            <summary>
+            生日类别：1、阴历；2、阳历；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.MyLife">
+            <summary>
+            预期寿命，默认值100
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Mobile">
+            <summary>
+            手机
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Email">
+            <summary>
+            Email
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.QQ">
+            <summary>
+            QQ
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.WeiXin">
+            <summary>
+            微信
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Address">
+            <summary>
+            地址
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.PostCode">
+            <summary>
+            邮编
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.CountryID">
+            <summary>
+            国家ID，来源于数据字典
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.ProvinceID">
+            <summary>
+            省份ID，来源于数据字典
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.CityID">
+            <summary>
+            城市ID，来源于数据字典
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.AreaID">
+            <summary>
+            区/县ID，来源于数据字典
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.IconUrl">
+            <summary>
+            头像路径
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.MySign">
+            <summary>
+            个性签名
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.Remark">
+            <summary>
+            备注信息
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.LoginModel">
+            <summary>
+            登陆
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginModel.Account">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginModel.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.RegisterMobileModel">
+            <summary>
+            手机注册
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterMobileModel.Mobile">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterMobileModel.Pwd">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterMobileModel.PwdRepeat">
+            <summary>
+            确认密码
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterMobileModel.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterMobileModel.TestNumber">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.RegisterEmailModel">
+            <summary>
+            邮箱注册
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterEmailModel.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterEmailModel.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterEmailModel.PasswordRepeat">
+            <summary>
+            确认密码
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterEmailModel.UserName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.RegisterEmailModel.TestNumber">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.LoginByQQModel">
+            <summary>
+            QQ注册
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginByQQModel.QQOpenID">
+            <summary>
+            QQOpenID
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginByQQModel.NickName">
+            <summary>
+            昵称
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.LoginByWeiXinModel">
+            <summary>
+            微信登录
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginByWeiXinModel.WeiXinOpenID">
+            <summary>
+            WeiXinOpenID
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginByWeiXinModel.NickName">
+            <summary>
+            昵称
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.LoginBySinaModel">
+            <summary>
+            新浪登录
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginBySinaModel.SinaOpenID">
+            <summary>
+            SinaOpenID
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.LoginBySinaModel.NickName">
+            <summary>
+            昵称
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.ProjectAttModel">
+            <summary>
+            添加事历附件
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.AttID">
+            <summary>
+            附件编号（更新附件必填）
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.MID">
+            <summary>
+            会员编号（添加附件必填）
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.ProjectID">
+            <summary>
+            事历编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.AttTitle">
+            <summary>
+            附件标题
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.AttInfo">
+            <summary>
+            附件说明
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.AttUrl">
+            <summary>
+            附件Url
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ProjectAttModel.AttType">
+            <summary>
+            附件类型
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.ProjectViewModel">
+            <summary>
+            事例
+            </summary>
+        </member>
+        <member name="T:HanHe.Web.Models.AddProjectModel">
+            <summary>
+            添加事历
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ProTitle">
+            <summary>
+            事历标题
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ProInfo">
+            <summary>
+            项目文本内容
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ImpropantWeight">
+            <summary>
+            重要程度：0、普通，缺省值；1、重要；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.UrgentWeight">
+            <summary>
+            紧急程度：0、普通，缺省值；1、紧急；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.StartDate">
+            <summary>
+            启动日期，默认创建日期为启动日期；预设启动日期，到期后，自动将事务状态设置为“进行中”
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ExpectDate">
+            <summary>
+            计划完成日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ProStatus">
+            <summary>
+            项目状态：0、初始状态，缺省值；1、完成；2、进行中；-1、放弃；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.FinishedDate">
+            <summary>
+            实际完成日期
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ProgressNum">
+            <summary>
+            进度，输入0-100的整数，以百分比显示
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.OpenStatus">
+            <summary>
+            开放状态：0、隐私；1、开放；2、好友可见
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+        <member name="T:HanHe.Web.Models.UpdateProjectModel">
+            <summary>
+            更新事历
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ProjectID">
+            <summary>
+            事历编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ProTitle">
+            <summary>
+            事历标题
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ProInfo">
+            <summary>
+            项目文本内容
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ImpropantWeight">
+            <summary>
+            重要程度：0、普通，缺省值；1、重要；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.UrgentWeight">
+            <summary>
+            紧急程度：0、普通，缺省值；1、紧急；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.StartDate">
+            <summary>
+            启动日期，默认创建日期为启动日期；预设启动日期，到期后，自动将事务状态设置为“进行中”
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ExpectDate">
+            <summary>
+            计划完成日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ProStatus">
+            <summary>
+            项目状态：0、初始状态，缺省值；1、完成；2、进行中；-1、放弃；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.FinishedDate">
+            <summary>
+            实际完成日期
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ProgressNum">
+            <summary>
+            进度，输入0-100的整数，以百分比显示
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.OpenStatus">
+            <summary>
+            开放状态：0、隐私；1、开放；2、好友可见
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+    </members>
+</doc>

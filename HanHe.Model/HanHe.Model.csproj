@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{403E5974-1E1B-4883-B27A-2CEC1D5E0CE4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HanHe.Model</RootNamespace>
+    <AssemblyName>HanHe.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zs_ChuanJia.cs" />
+    <Compile Include="Zs_ChuanJiaAtt.cs" />
+    <Compile Include="Zs_ChuanJiaComment.cs" />
+    <Compile Include="Zs_Department.cs" />
+    <Compile Include="Zs_Dic.cs" />
+    <Compile Include="Zs_FavoritesInfo.cs" />
+    <Compile Include="Zs_FCAtt.cs" />
+    <Compile Include="Zs_FCBlack.cs" />
+    <Compile Include="Zs_FCComment.cs" />
+    <Compile Include="Zs_FCircle.cs" />
+    <Compile Include="Zs_FGroup.cs" />
+    <Compile Include="Zs_Friend.cs" />
+    <Compile Include="Zs_GanWu.cs" />
+    <Compile Include="Zs_GanWuAtt.cs" />
+    <Compile Include="Zs_GanWuComment.cs" />
+    <Compile Include="Zs_GuoXue.cs" />
+    <Compile Include="Zs_GuoXueAtt.cs" />
+    <Compile Include="Zs_GuoXueComment.cs" />
+    <Compile Include="Zs_Keywords.cs" />
+    <Compile Include="Zs_Member.cs" />
+    <Compile Include="Zs_MemorialDay.cs" />
+    <Compile Include="Zs_NewFriend.cs" />
+    <Compile Include="Zs_Product.cs" />
+    <Compile Include="Zs_ProductAtt.cs" />
+    <Compile Include="Zs_Project.cs" />
+    <Compile Include="Zs_ProjectAtt.cs" />
+    <Compile Include="Zs_ProjectClock.cs" />
+    <Compile Include="Zs_ProjectComment.cs" />
+    <Compile Include="Zs_Right.cs" />
+    <Compile Include="Zs_Role.cs" />
+    <Compile Include="Zs_RoleUser.cs" />
+    <Compile Include="Zs_SetNotice.cs" />
+    <Compile Include="Zs_SetPrivacy.cs" />
+    <Compile Include="Zs_User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,123 @@
+﻿@model HanHe.Manage.Models.GuoXue.GuoXueCreate
+@{
+    ViewBag.Title = "添加国学";
+    ViewBag.Forms = "国学列表";
+    ViewBag.Elements = "添加国学";
+    ViewBag.FormsUrl = Url.Action("GuoXueList", "GuoXue");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "GuoXue", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Keywords, new { @class = "col-sm-3 control-label no-padding-right" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.Keywords, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.Keywords, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GxTitle, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.GxTitle, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.GxTitle, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GxTitleShort, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.GxTitleShort, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.GxTitleShort, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GxInfo, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.GxInfo, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.GxInfo, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category01, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <select class="col-xs-10 col-sm-5 chosen-select" data-placeholder="Choose a Country...">
+                    <option value="">&nbsp;</option>
+                    <option value="0">芒种</option>
+                    <option value="1">夏至</option>
+                    <option value="2">小暑</option>
+                </select>
+                @*@Html.DropDownListFor(f => f.Category01, null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })*@
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category02, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <select class="col-xs-10 col-sm-5 chosen-select" data-placeholder="Choose a Country...">
+                    <option value="">&nbsp;</option>
+                    <option value="AL">Alabama</option>
+                </select>
+                @*@Html.DropDownListFor(f => f.Category01, null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })*@
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category03, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <select class="col-xs-10 col-sm-5 chosen-select" data-placeholder="Choose a Country...">
+                    <option value="">&nbsp;</option>
+                    <option value="AL">Alabama</option>
+                </select>
+                @*@Html.DropDownListFor(f => f.Category01, null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })*@
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GxStatus, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <select class="col-xs-10 col-sm-5" id="form-field-select-2" multiple="multiple">
+                    <option value="0">未发布</option>
+                    <option value="1">已发布</option>
+                </select>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    添加
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <div class="hr hr-24"></div>
+    </div>
+}
+
+@section Scripts {
+
+}
