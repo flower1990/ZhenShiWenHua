@@ -647,6 +647,7 @@
     <Content Include="Views\Dic\DicList.cshtml" />
     <Content Include="Views\Dic\DicCreate.cshtml" />
     <Content Include="Views\Dic\DicEdit.cshtml" />
+    <Content Include="Views\GuoXue\GuoXueEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
