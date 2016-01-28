@@ -10,8 +10,6 @@ namespace HanHe.Manage.Controllers
     {
         public ActionResult Index()
         {
-            //string userName = User.Identity.Name;
-
             return View();
         }
     }
