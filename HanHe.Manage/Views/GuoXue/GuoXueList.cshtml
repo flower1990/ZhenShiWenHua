@@ -21,22 +21,6 @@
 
 @section Scripts {
     <script type="text/javascript">
-    @*var roleList = '';
-    $.ajax({
-        type: "post",
-        url: "@Url.Action("GetRoleProperties", "Role")",
-        dataType: "json",
-        async: false,
-        success: function (data) {
-            //赋值给全局变量;
-            var items = [];
-            $.each(data, function (key, val) {
-                items.push(key + ':' + val.Name + ';');
-            });
-            roleList = items.join('');
-        }
-    });*@
-
         jQuery(function ($) {
             var grid_selector = "#grid-table";
             var pager_selector = "#grid-pager";
@@ -45,7 +29,7 @@
                 caption: "国学列表",
                 url: '@Url.Action("GetData", "GuoXue")',
                 datatype: "json",
-                colNames: ['操作', '编号', '标题', '短标题', '信息', '分类1', '分类2', '分类3', '创建时间', '更新时间', '状态', '发布日期', '预期寿命', '浏览统计', '点赞统计'],
+                colNames: ['操作', '编号', '关键词', '标题', '短标题', '分类1', '分类2', '分类3', '创建时间', '更新时间', '发布日期', '浏览统计', '点赞统计', '状态'],
                 colModel: [
                     {
                         name: 'myac', index: '操作', width: 80, fixed: true, sortable: false, resize: false,
@@ -57,19 +41,18 @@
                         }
                     },
                     { name: 'GxID', index: 'GxID', hidden: true, width: 90, editable: false, edittype: "text" },
-                    { name: 'Keywords', index: 'Keywords', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'Keywords', index: 'Keywords', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'GxTitle', index: 'GxTitle', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'GxTitleShort', index: 'GxTitleShort', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'GxInfo', index: 'GxInfo', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'Category01', index: 'Category01', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'Category02', index: 'Category02', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'Category03', index: 'Category03', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'CreateDate', index: 'CreateDate', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'UpdateDate', index: 'UpdateDate', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'GxStatusName', index: 'GxStatusName', width: 90, editable: true, eedittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'PublishDate', index: 'PublishDate', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'ViewCount', index: 'ViewCount', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'GoodCount', index: 'GoodCount', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'Category01', index: 'Category01', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'Category02', index: 'Category02', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'Category03', index: 'Category03', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'CreateDate', index: 'CreateDate', width: 90, editable: false, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'UpdateDate', index: 'UpdateDate', width: 90, editable: false, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'PublishDate', index: 'PublishDate', width: 90, editable: false, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'ViewCount', index: 'ViewCount', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GoodCount', index: 'GoodCount', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GxStatusName', index: 'GxStatusName', width: 90, editable: false, eedittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                 ],
                 height: 360,
                 rowNum: 10,
@@ -126,7 +109,7 @@
                 },
                 {
                     //edit record form
-                    url: '@Url.Action("Edit", "Member")',
+                    url: '@Url.Action("Edit", "GuoXue")',
                     closeAfterEdit: true,
                     recreateForm: true,
                     beforeShowForm: function (e) {
@@ -137,7 +120,7 @@
                 },
                 {
                     //new record form
-                    url: '@Url.Action("Create", "Member")',
+                    url: '@Url.Action("Create", "GuoXue")',
                     closeAfterAdd: false,
                     recreateForm: true,
                     viewPagerButtons: false,
@@ -149,7 +132,7 @@
                 },
                 {
                     //delete record form
-                    url: '@Url.Action("Delete", "Member")',
+                    url: '@Url.Action("Delete", "GuoXue")',
                     recreateForm: true,
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
@@ -317,7 +300,7 @@
                     if (confirm("确定要删除选中项？")) {
                         for (var i = 0; i < len; i++) {
                             var rowData = $(grid_selector).jqGrid('getRowData', selectedRowIds[i]);
-                            $.post('@Url.Action("Delete", "Member")', { id: rowData.MID }, function (data) {
+                            $.post('@Url.Action("Delete", "GuoXue")', { id: rowData.GxID }, function (data) {
                                 $(grid_selector).jqGrid("delRowData", selectedRowIds[0]);
                             });
                         }

@@ -16,22 +16,6 @@
 
 @section Scripts {
     <script type="text/javascript">
-    @*var roleList = '';
-    $.ajax({
-        type: "post",
-        url: "@Url.Action("GetRoleProperties", "Role")",
-        dataType: "json",
-        async: false,
-        success: function (data) {
-            //赋值给全局变量;
-            var items = [];
-            $.each(data, function (key, val) {
-                items.push(key + ':' + val.Name + ';');
-            });
-            roleList = items.join('');
-        }
-    });*@
-
         jQuery(function ($) {
             var grid_selector = "#grid-table";
             var pager_selector = "#grid-pager";

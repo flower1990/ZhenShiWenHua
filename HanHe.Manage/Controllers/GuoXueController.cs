@@ -17,6 +17,23 @@ namespace HanHe.Manage.Controllers
         SysFun sysFun = new SysFun();
         IZs_GuoXue bMember = new BZs_GuoXue();
 
+        public SelectList GetCategory01List(int selectedValue)
+        {
+            List<SelectListItem> listItem = new List<SelectListItem>() 
+            {
+                new SelectListItem(){ Value = "0", Text = "冬至"},
+                new SelectListItem(){ Value = "1", Text = "小寒"},
+                new SelectListItem(){ Value = "1", Text = "大寒"},
+                new SelectListItem(){ Value = "1", Text = "立春"},
+                new SelectListItem(){ Value = "1", Text = "雨水"},
+                new SelectListItem(){ Value = "1", Text = "惊蛰"},
+                new SelectListItem(){ Value = "1", Text = "春分"},
+                new SelectListItem(){ Value = "1", Text = "清明"},
+            };
+            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
+            return selectList;
+        }
+
         /// <summary>
         /// 国学列表
         /// </summary>
@@ -82,6 +99,10 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         public ActionResult GuoXueCreate()
         {
+            @ViewBag.Category01 = GetCategory01List(0);
+            @ViewBag.Category02 = GetCategory01List(0);
+            @ViewBag.Category03 = GetCategory01List(0);
+
             return View();
         }
         /// <summary>
@@ -90,12 +111,16 @@ namespace HanHe.Manage.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult GuoXueCreate(GuoXueCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
             var item = new Zs_GuoXue();
             item = sysFun.InitialEntity<GuoXueCreate, Zs_GuoXue>(model, item);
+            item.UpdateDate = DateTime.Now;
+            item.PublishDate = DateTime.Now;
             item = bMember.Add(item);
 
             if (item.GxID > 0) return RedirectToAction("GuoXueList");
