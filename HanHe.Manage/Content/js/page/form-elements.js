@@ -202,7 +202,7 @@
 
 
 
-    $('.date-picker').datepicker({ autoclose: true }).next().on(ace.click_event, function () {
+    $('.date-picker').datepicker({ language: 'zh-CN', format:'yyyy-mm-dd', autoclose: true }).next().on(ace.click_event, function () {
         $(this).prev().focus();
     });
     $('input[name=date-range-picker]').daterangepicker().prev().on(ace.click_event, function () {

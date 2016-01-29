@@ -146,23 +146,23 @@ namespace HanHe.Manage.Controllers
             return Json(hierarchyRows, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
-        /// 添加
+        /// 添加子节点
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult DicCreate()
+        public ActionResult DicCreateChildNode()
         {
             @ViewBag.DicProperty = GetPropertyList(0);
             return View();
         }
         /// <summary>
-        /// 添加
+        /// 添加子节点
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DicCreate(DicCreate model)
+        public ActionResult DicCreateChildNode(DicCreateChildNode model)
         {
             if (!ModelState.IsValid) { return View(model); }
 
@@ -178,6 +178,45 @@ namespace HanHe.Manage.Controllers
                 new SqlParameter("@SortID", model.SortID),
                 new SqlParameter("@Remark", model.Remark),
                 new SqlParameter("@isLeaf", true),
+            };
+
+            var result = bDic.Add(sql, param);
+            if (result.DicID > 0) return RedirectToAction("DicList");
+            else return View(model);
+        }
+        /// <summary>
+        /// 添加根节点
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ActionResult DicCreateRootNode()
+        {
+            @ViewBag.DicProperty = GetPropertyList(0);
+            return View();
+        }
+        /// <summary>
+        /// 添加跟节点
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DicCreateRootNode(DicCreateChildNode model)
+        {
+            if (!ModelState.IsValid) { return View(model); }
+
+            string sql = "exec SP_DicCreate @DicID,@DicCode,@DicName,@DicNameEn,@DicProperty,@ParentID,@SortID,@Remark,@isLeaf";
+            SqlParameter[] param = new SqlParameter[]
+            {
+                new SqlParameter("@DicID", model.ParentID),
+                new SqlParameter("@DicCode", model.DicCode),
+                new SqlParameter("@DicName", model.DicName),
+                new SqlParameter("@DicNameEn", model.DicNameEn),
+                new SqlParameter("@DicProperty", model.DicProperty),
+                new SqlParameter("@ParentID", 0),
+                new SqlParameter("@SortID", model.SortID),
+                new SqlParameter("@Remark", model.Remark),
+                new SqlParameter("@isLeaf", false),
             };
 
             var result = bDic.Add(sql, param);

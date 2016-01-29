@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HanHe.Manage.Models.Dic
 {
-    public class DicCreate
+    public class DicCreateRootNode
     {
         /// <summary>
         /// 字典项标识
@@ -30,11 +30,6 @@ namespace HanHe.Manage.Models.Dic
         /// </summary>		
         [Display(Name = "字典属性")]
         public int DicProperty { get; set; }
-        /// <summary>
-        /// 上级字典ID
-        /// </summary>		
-        [Display(Name = "上级字典")]
-        public int ParentID { get; set; }
         /// <summary>
         /// 排序字段，升序排序
         /// </summary>		

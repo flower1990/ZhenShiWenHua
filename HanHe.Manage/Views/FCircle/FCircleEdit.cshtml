@@ -1,0 +1,75 @@
+﻿@model HanHe.Manage.Models.FCircle.FCircleEdit
+@{
+    ViewBag.Title = "添加国学";
+    ViewBag.Forms = "国学列表";
+    ViewBag.Elements = "添加国学";
+    ViewBag.FormsUrl = Url.Action("GuoXueList", "GuoXue");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("GuoXueCreate", "GuoXue", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FCTitle, new { @class = "col-sm-1 control-label no-padding-right" })
+
+            <div class="col-sm-11">
+                @Html.TextBoxFor(model => model.FCTitle, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.FCTitle, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FCUrl, new { @class = "col-sm-1 control-label no-padding-right" })
+            <div class="col-sm-11">
+                @Html.TextBoxFor(model => model.FCUrl, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.FCUrl, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FCInfo, new { @class = "col-sm-1 control-label no-padding-right" })
+            <div class="col-sm-11">
+                <!-- 加载编辑器的容器 -->
+                <script id="FCInfo" name="FCInfo" type="text/plain">
+                </script>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    提交
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <div class="hr hr-24"></div>
+    </div>
+}
+
+@section Scripts {
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="~/Content/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="~/Content/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('FCInfo', {
+            autoHeight: false
+        });
+    </script>
+}

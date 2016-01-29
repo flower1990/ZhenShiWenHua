@@ -35,6 +35,16 @@ namespace HanHe.Manage.Controllers
             return selectList;
         }
 
+        public SelectList GetGxStatusList(int selectedValue)
+        {
+            List<SelectListItem> listItem = new List<SelectListItem>() 
+            {
+                new SelectListItem(){ Value = "0", Text = "未发布"},
+                new SelectListItem(){ Value = "1", Text = "已发布"},
+            };
+            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
+            return selectList;
+        }
         /// <summary>
         /// 国学列表
         /// </summary>
@@ -137,6 +147,11 @@ namespace HanHe.Manage.Controllers
             var item = bGuoXue.Find(id);
             var model = new GuoXueEdit();
             model = sysFun.InitialEntity<Zs_GuoXue, GuoXueEdit>(item, model);
+
+            @ViewBag.Category01 = GetCategory01List(0);
+            @ViewBag.Category02 = GetCategory01List(0);
+            @ViewBag.Category03 = GetCategory01List(0);
+            @ViewBag.GxStatus = GetGxStatusList(1);
 
             return View(model);
         }

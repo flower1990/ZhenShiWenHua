@@ -1,4 +1,4 @@
-﻿@model HanHe.Manage.Models.Dic.DicCreate
+﻿@model HanHe.Manage.Models.Dic.DicCreateChildNode
 @{
     ViewBag.Title = "添加字典";
     ViewBag.Elements = "添加字典";
@@ -13,7 +13,7 @@
     }
 </style>
 
-@using (Html.BeginForm("DicCreate", "Dic", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+@using (Html.BeginForm("DicCreateChildNode", "Dic", FormMethod.Post, htmlAttributes: new { id = "form1" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">

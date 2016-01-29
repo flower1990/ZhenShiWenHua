@@ -176,21 +176,27 @@
     <Compile Include="Content\ueditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\DicController.cs" />
+    <Compile Include="Controllers\FCircleController.cs" />
     <Compile Include="Controllers\GuoXueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeywordsController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MemorialDayController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RightController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Dic\DicCreate.cs" />
+    <Compile Include="Models\Dic\DicCreateChildNode.cs" />
+    <Compile Include="Models\Dic\DicCreateRootNode.cs" />
     <Compile Include="Models\Dic\DicEdit.cs" />
     <Compile Include="Models\Dic\DicTreeList.cs" />
     <Compile Include="Models\Entities\RoleProperty.cs" />
+    <Compile Include="Models\FCircle\FCircleCreate.cs" />
+    <Compile Include="Models\FCircle\FCircleEdit.cs" />
     <Compile Include="Models\Grid\Filter.cs" />
     <Compile Include="Models\Grid\GridModelBinder.cs" />
     <Compile Include="Models\Grid\GridSettings.cs" />
@@ -206,6 +212,9 @@
     <Compile Include="Models\Member\MemberCreate.cs" />
     <Compile Include="Models\Member\MemberEdit.cs" />
     <Compile Include="Models\Member\MemberViewModel.cs" />
+    <Compile Include="Models\MemorialDay\MemorialDayEdit.cs" />
+    <Compile Include="Models\Project\ProjectCreate.cs" />
+    <Compile Include="Models\Project\ProjectEdit.cs" />
     <Compile Include="Models\Repositories\RolePropertyRepository.cs" />
     <Compile Include="Models\Right\RightCreate.cs" />
     <Compile Include="Models\Right\RightEdit.cs" />
@@ -294,6 +303,7 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\chosen.jquery.min.js" />
     <Content Include="Content\js\date-time\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\date-time\locales\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Content\js\date-time\bootstrap-timepicker.min.js" />
     <Content Include="Content\js\date-time\daterangepicker.min.js" />
     <Content Include="Content\js\date-time\moment.min.js" />
@@ -657,11 +667,17 @@
     <Content Include="Views\GuoXue\GuoXueList.cshtml" />
     <Content Include="Views\GuoXue\GuoXueCreate.cshtml" />
     <Content Include="Views\Dic\DicList.cshtml" />
-    <Content Include="Views\Dic\DicCreate.cshtml" />
+    <Content Include="Views\Dic\DicCreateChildNode.cshtml" />
     <Content Include="Views\Dic\DicEdit.cshtml" />
+    <Content Include="Views\GuoXue\GuoXueEdit.cshtml" />
+    <Content Include="Views\Dic\DicCreateRootNode.cshtml" />
+    <Content Include="Views\FCircle\FCircleEdit.cshtml" />
+    <Content Include="Views\Project\ProjectList.cshtml" />
+    <Content Include="Views\Project\ProjectCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MemorialDay\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

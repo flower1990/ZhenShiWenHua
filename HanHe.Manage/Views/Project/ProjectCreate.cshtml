@@ -1,0 +1,153 @@
+﻿@model HanHe.Manage.Models.Project.ProjectCreate
+@{
+    ViewBag.Title = "添加行事历";
+    ViewBag.Forms = "行事历列表";
+    ViewBag.Elements = "添加行事历";
+    ViewBag.FormsUrl = Url.Action("ProjectList", "Project");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ProjectCreate", "Project", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProTitle, new { @class = "col-sm-2 control-label no-padding-right" })
+
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.ProTitle, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.ProTitle, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProTitleShort, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.ProTitleShort, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.ProTitleShort, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5 no-padding-left input-group">
+                    @Html.TextBoxFor(model => model.StartDate, htmlAttributes: new { @class = "form-control date-picker" })
+                    <span class="input-group-addon">
+                        <i class="icon-calendar bigger-110"></i>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.StartDate, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpectDate, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5 no-padding-left input-group">
+                    @Html.TextBoxFor(model => model.ExpectDate, htmlAttributes: new { @class = "form-control date-picker" })
+                    <span class="input-group-addon">
+                        <i class="icon-calendar bigger-110"></i>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.ExpectDate, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImpropantWeight, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("ImpropantWeight", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UrgentWeight, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("UrgentWeight", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProStatus, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("ProStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OpenStatus, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("OpenStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProgressNum, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5">
+                    @Html.EditorFor(model => model.ProgressNum)
+                </div>
+                @Html.ValidationMessageFor(model => model.ProgressNum, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SortID, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5">
+                    @Html.EditorFor(model => model.SortID)
+                </div>
+                @Html.ValidationMessageFor(model => model.SortID, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProInfo, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <script id="ProInfo" name="ProInfo" type="text/plain">
+                </script>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    添加
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <div class="hr hr-24"></div>
+    </div>
+}
+
+@section Scripts {
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('ProInfo', {
+            autoHeight: false,
+            initialFrameHeight: 300
+        });
+    </script>
+}
