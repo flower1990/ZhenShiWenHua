@@ -175,8 +175,10 @@
     <Compile Include="Content\ueditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="Content\ueditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Controllers\ChuanJiaController.cs" />
     <Compile Include="Controllers\DicController.cs" />
     <Compile Include="Controllers\FCircleController.cs" />
+    <Compile Include="Controllers\GanWuController.cs" />
     <Compile Include="Controllers\GuoXueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeywordsController.cs" />
@@ -190,6 +192,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChuanJia\ChuanJiaCreate.cs" />
+    <Compile Include="Models\ChuanJia\ChuanJiaEdit.cs" />
     <Compile Include="Models\Dic\DicCreateChildNode.cs" />
     <Compile Include="Models\Dic\DicCreateRootNode.cs" />
     <Compile Include="Models\Dic\DicEdit.cs" />
@@ -197,6 +201,8 @@
     <Compile Include="Models\Entities\RoleProperty.cs" />
     <Compile Include="Models\FCircle\FCircleCreate.cs" />
     <Compile Include="Models\FCircle\FCircleEdit.cs" />
+    <Compile Include="Models\GanWu\GanWuCreate.cs" />
+    <Compile Include="Models\GanWu\GanWuEdit.cs" />
     <Compile Include="Models\Grid\Filter.cs" />
     <Compile Include="Models\Grid\GridModelBinder.cs" />
     <Compile Include="Models\Grid\GridSettings.cs" />
@@ -674,6 +680,13 @@
     <Content Include="Views\FCircle\FCircleEdit.cshtml" />
     <Content Include="Views\Project\ProjectList.cshtml" />
     <Content Include="Views\Project\ProjectCreate.cshtml" />
+    <Content Include="Views\Project\ProjectEdit.cshtml" />
+    <Content Include="Views\ChuanJia\ChuanJiaCreate.cshtml" />
+    <Content Include="Views\ChuanJia\ChuanJiaEdit.cshtml" />
+    <Content Include="Views\ChuanJia\ChuanJiaList.cshtml" />
+    <Content Include="Views\GanWu\GanWuList.cshtml" />
+    <Content Include="Views\GanWu\GanWuCreate.cshtml" />
+    <Content Include="Views\GanWu\GanWuEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

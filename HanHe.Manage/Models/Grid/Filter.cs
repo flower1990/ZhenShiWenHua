@@ -23,8 +23,7 @@ namespace HanHe.Manage.Models.Grid
             {
                 var serializer = new DataContractJsonSerializer(typeof(GridFilter));
                 System.IO.StringReader reader = new System.IO.StringReader(jsonData);
-                System.IO.MemoryStream ms =
-                    new System.IO.MemoryStream(Encoding.Default.GetBytes(jsonData));
+                System.IO.MemoryStream ms = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(jsonData));
                 return serializer.ReadObject(ms) as GridFilter;
             }
             catch

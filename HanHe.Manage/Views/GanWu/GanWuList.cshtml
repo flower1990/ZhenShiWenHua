@@ -1,21 +1,21 @@
 ﻿@model IEnumerable<HanHe.Model.Zs_Role>
 
 @{
-    ViewBag.Title = "行事历列表";
-    ViewBag.Forms = "行事历列表";
-    ViewBag.Elements = "行事历列表";
-    ViewBag.FormsUrl = Url.Action("ProjectList", "Project");
+    ViewBag.Title = "感悟未来列表";
+    ViewBag.Forms = "感悟未来列表";
+    ViewBag.Elements = "感悟未来列表";
+    ViewBag.FormsUrl = Url.Action("GanWuList", "GanWu");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <form id="form1">
     <div class="alert alert-info">
-        <a id="item-create" class="btn btn-primary" href="@Url.Action("ProjectCreate", "Project")"><i class='icon-plus align-top bigger-125'></i>添加</a>
+        <a id="item-create" class="btn btn-primary" href="@Url.Action("GanWuCreate", "GanWu")"><i class='icon-plus align-top bigger-125'></i>添加</a>
         <a id="item-edit" class="btn btn-purple" href="#"><i class='icon-pencil align-top bigger-125'></i>修改</a>
         <a id="item-delete" class="btn btn-danger" href="#"><i class='icon-remove align-top bigger-125'></i>删除</a>
         <div id="dialog-confirm" class="hide">
             <div class="alert alert-info bigger-110">
-                行事历将被永久删除，无法恢复
+                感悟未来将被永久删除，无法恢复
             </div>
 
             <div class="space-6"></div>
@@ -94,10 +94,10 @@
                             var items = [];
                             for (var i = 0; i < len; i++) {
                                 var rowData = $(grid_selector).jqGrid('getRowData', selectedRowIds[i]);
-                                items.push(rowData.ProjectID);
+                                items.push(rowData.GwID);
                             }
 
-                            $.post('@Url.Action("ProjectDelete", "Project")', { id: items.join(',') }, function (data) {
+                            $.post('@Url.Action("GanWuDelete", "GanWu")', { id: items.join(',') }, function (data) {
                                 if (data) {
                                     for (var i = 0; i < len; i++) {
                                         $(grid_selector).jqGrid("delRowData", selectedRowIds[0]);
@@ -121,48 +121,48 @@
     </script>
     <!--编辑-->
     <script type="text/javascript">
-            $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-                _title: function (title) {
-                    var $title = this.options.title || '&nbsp;'
-                    if (("title_html" in this.options) && this.options.title_html == true)
-                        title.html($title);
-                    else title.text($title);
-                }
-            }));
-            
-            $("#item-edit").on('click', function (e) {
-                var grid_selector = "#grid-table";
-                var pager_selector = "#grid-pager";
-                var selectedRowIds = $(grid_selector).jqGrid("getGridParam", "selarrrow");
-                var len = selectedRowIds.length;
-                if (len>1 || len==0) {
-                    $("#dialog-edit").removeClass('hide').dialog({
-                        modal: true,
-                        title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> 系统提示</h4></div>",
-                        title_html: true,
-                        buttons: [
-                            //{
-                            //    text: "Cancel",
-                            //    "class": "btn btn-xs",
-                            //    click: function () {
-                            //        $(this).dialog("close");
-                            //    }
-                            //},
-                            {
-                                text: "OK",
-                                "class": "btn btn-primary btn-xs",
-                                click: function () {
-                                    $(this).dialog("close");
-                                }
-                            }
-                        ]
-                    });
-                    return;
-                }
+        $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+            _title: function (title) {
+                var $title = this.options.title || '&nbsp;'
+                if (("title_html" in this.options) && this.options.title_html == true)
+                    title.html($title);
+                else title.text($title);
+            }
+        }));
 
-                var rowData = $(grid_selector).jqGrid('getRowData', selectedRowIds[0]);
-                window.location.href = "/Project/ProjectEdit/" + rowData.ProjectID;
-            });
+        $("#item-edit").on('click', function (e) {
+            var grid_selector = "#grid-table";
+            var pager_selector = "#grid-pager";
+            var selectedRowIds = $(grid_selector).jqGrid("getGridParam", "selarrrow");
+            var len = selectedRowIds.length;
+            if (len > 1 || len == 0) {
+                $("#dialog-edit").removeClass('hide').dialog({
+                    modal: true,
+                    title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> 系统提示</h4></div>",
+                    title_html: true,
+                    buttons: [
+                        //{
+                        //    text: "Cancel",
+                        //    "class": "btn btn-xs",
+                        //    click: function () {
+                        //        $(this).dialog("close");
+                        //    }
+                        //},
+                        {
+                            text: "OK",
+                            "class": "btn btn-primary btn-xs",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+                return;
+            }
+
+            var rowData = $(grid_selector).jqGrid('getRowData', selectedRowIds[0]);
+            window.location.href = "/GanWu/GanWuEdit/" + rowData.GwID;
+        });
     </script>
     <!--加载表格-->
     <script type="text/javascript">
@@ -171,10 +171,10 @@
             var pager_selector = "#grid-pager";
 
             jQuery(grid_selector).jqGrid({
-                caption: "行事历列表",
-                url: '@Url.Action("GetData", "Project")',
+                caption: "感悟未来列表",
+                url: '@Url.Action("GetData", "GanWu")',
                 datatype: "json",
-                colNames: ['编号', '会员', '短标题', '重要程度', '紧急程度', '排序', '启动日期', '计划完成日期', '状态', '实际完成日期', '进度', '开放状态', '创建日期', '更新日期', '浏览统计', '点赞统计'],
+                colNames: ['编号', '会员', '感悟类型', '短标题', '公开状态', '未来日期', '寄送日期', '感悟状态', '提醒状态', '创建日期', '更新日期', '浏览统计', '点赞统计'],
                 colModel: [
                     //{
                     //    name: 'myac', index: '操作', width: 80, fixed: true, sortable: false, resize: false, search: false,
@@ -184,18 +184,16 @@
                     //        //editformbutton: true, editOptions: { recreateForm: true, beforeShowForm: beforeEditCallback }
                     //    }
                     //},
-                    { name: 'ProjectID', index: 'ProjectID', keys: true, hidden: true, width: 90, editable: true, edittype: "text" },
+                    { name: 'GwID', index: 'GwID', keys: true, hidden: true, width: 90, editable: true, edittype: "text" },
                     { name: 'MID', index: 'MID', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'ProTitleShort', index: 'ProTitleShort', width: 300, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'ImpropantWeight', index: 'ImpropantWeight', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "0:普通;1:重要;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'UrgentWeight', index: 'UrgentWeight', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "0:普通;1:紧急;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'SortID', index: 'SortID', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'StartDate', index: 'StartDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'ExpectDate', index: 'ExpectDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'ProStatus', index: 'ProStatus', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "0:初始状态;1:完成;2:进行中;-1:放弃;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'FinishedDate', index: 'FinishedDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'ProgressNum', index: 'ProgressNum', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GwType', index: 'GwType', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "1:感悟;2:梦想心愿;3:大事;4:未来的信;5:杂谈;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GwTitleShort', index: 'GwTitleShort', width: 300, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'OpenStatus', index: 'OpenStatus', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "0:隐私;1:开放;2:好友可见;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GotoDate', index: 'GotoDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'PostDate', index: 'PostDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GwStatus', index: 'GwStatus', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "0:初始;1:提交;2:送达;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'SmsStatus', index: 'SmsStatus', width: 90, editable: true, edittype: "select", formatter: "select", editoptions: { value: "0:不发短信;1:发送短信;" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    //{ name: 'SortID', index: 'SortID', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'CreateDate', index: 'CreateDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'UpdateDate', index: 'UpdateDate', width: 90, editable: true, edittype: "text", formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'ViewCount', index: 'ViewCount', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
@@ -205,7 +203,7 @@
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 pager: pager_selector,
-                sortname: 'ProjectID',
+                sortname: 'GwID',
                 sortorder: 'desc',
                 altRows: true,
                 autowidth: true,
@@ -213,6 +211,10 @@
                 multiboxonly: true,
                 viewrecords: true,
                 shrinkToFit: false,
+                gridComplete: function () {
+                    var icons = $(".ui-icon-trash");//隐藏删除键
+                    icons.hide();
+                },
                 loadComplete: function () {
                     var table = this;
                     setTimeout(function () {
@@ -263,7 +265,7 @@
                 },
                 {
                     //edit record form
-                    url: '@Url.Action("ProjectEdit", "Project")',
+                    url: '@Url.Action("GanWuEdit", "GanWu")',
                     closeAfterEdit: true,
                     recreateForm: true,
                     beforeShowForm: function (e) {
@@ -274,7 +276,7 @@
                 },
                 {
                     //new record form
-                    url: '@Url.Action("ProjectCreate", "Project")',
+                    url: '@Url.Action("GanWuCreate", "GanWu")',
                     closeAfterAdd: true,
                     recreateForm: true,
                     viewPagerButtons: false,
@@ -286,7 +288,7 @@
                 },
                 {
                     //delete record form
-                    url: '@Url.Action("ProjectDelete", "Project")',
+                    url: '@Url.Action("GanWuDelete", "GanWu")',
                     recreateForm: true,
                     beforeShowForm: function (e) {
                         var form = $(e[0]);

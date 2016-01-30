@@ -1,13 +1,13 @@
-﻿@model HanHe.Manage.Models.Project.ProjectCreate
+﻿@model HanHe.Manage.Models.GanWu.GanWuCreate
 @{
-    ViewBag.Title = "添加行事历";
-    ViewBag.Forms = "行事历列表";
-    ViewBag.Elements = "添加行事历";
-    ViewBag.FormsUrl = Url.Action("ProjectList", "Project");
+    ViewBag.Title = "添加感悟未来";
+    ViewBag.Forms = "感悟未来列表";
+    ViewBag.Elements = "添加感悟未来";
+    ViewBag.FormsUrl = Url.Action("GanWuList", "GanWu");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("ProjectCreate", "Project", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+@using (Html.BeginForm("GanWuCreate", "GanWu", FormMethod.Post, htmlAttributes: new { id = "form1" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -23,81 +23,27 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MID, new { @class = "col-sm-2 control-label no-padding-right" })
+            @Html.LabelFor(model => model.GwTitle, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.TextBoxFor(model => model.MID, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
-                @Html.ValidationMessageFor(model => model.MID, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+                @Html.TextBoxFor(model => model.GwTitle, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.GwTitle, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
             </div>
         </div>
         <div class="space-4"></div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProTitle, new { @class = "col-sm-2 control-label no-padding-right" })
-
+            @Html.LabelFor(model => model.GwTitleShort, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.TextBoxFor(model => model.ProTitle, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
-                @Html.ValidationMessageFor(model => model.ProTitle, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+                @Html.TextBoxFor(model => model.GwTitleShort, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.GwTitleShort, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
             </div>
         </div>
         <div class="space-4"></div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProTitleShort, new { @class = "col-sm-2 control-label no-padding-right" })
+            @Html.LabelFor(model => model.GwType, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.TextBoxFor(model => model.ProTitleShort, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
-                @Html.ValidationMessageFor(model => model.ProTitleShort, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
-            </div>
-        </div>
-        <div class="space-4"></div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                <div class="col-xs-10 col-sm-5 no-padding-left input-group">
-                    @Html.TextBoxFor(model => model.StartDate, htmlAttributes: new { @class = "form-control date-picker" })
-                    <span class="input-group-addon">
-                        <i class="icon-calendar bigger-110"></i>
-                    </span>
-                </div>
-                @Html.ValidationMessageFor(model => model.StartDate, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
-            </div>
-        </div>
-        <div class="space-4"></div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpectDate, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                <div class="col-xs-10 col-sm-5 no-padding-left input-group">
-                    @Html.TextBoxFor(model => model.ExpectDate, htmlAttributes: new { @class = "form-control date-picker" })
-                    <span class="input-group-addon">
-                        <i class="icon-calendar bigger-110"></i>
-                    </span>
-                </div>
-                @Html.ValidationMessageFor(model => model.ExpectDate, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
-            </div>
-        </div>
-        <div class="space-4"></div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImpropantWeight, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                @Html.DropDownList("ImpropantWeight", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
-            </div>
-        </div>
-        <div class="space-4"></div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UrgentWeight, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                @Html.DropDownList("UrgentWeight", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
-            </div>
-        </div>
-        <div class="space-4"></div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProStatus, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                @Html.DropDownList("ProStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+                @Html.DropDownList("GwType", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
             </div>
         </div>
         <div class="space-4"></div>
@@ -105,7 +51,51 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OpenStatus, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.DropDownList("OpenStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+                @Html.DropDownList("OpenStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GotoDate, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5 no-padding-left input-group">
+                    @Html.TextBoxFor(model => model.GotoDate, htmlAttributes: new { @class = "form-control date-picker" })
+                    <span class="input-group-addon">
+                        <i class="icon-calendar bigger-110"></i>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.GotoDate, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostDate, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5 no-padding-left input-group">
+                    @Html.TextBoxFor(model => model.PostDate, htmlAttributes: new { @class = "form-control date-picker" })
+                    <span class="input-group-addon">
+                        <i class="icon-calendar bigger-110"></i>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.PostDate, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GwStatus, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("GwStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SmsStatus, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("SmsStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
             </div>
         </div>
         <div class="space-4"></div>
@@ -129,17 +119,6 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProgressNum, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                <div class="col-xs-10 col-sm-5 no-padding-left">
-                    @Html.EditorFor(model => model.ProgressNum)
-                </div>
-                @Html.ValidationMessageFor(model => model.ProgressNum, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
-            </div>
-        </div>
-        <div class="space-4"></div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.SortID, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
                 <div class="col-xs-10 col-sm-5 no-padding-left">
@@ -151,9 +130,9 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProInfo, new { @class = "col-sm-2 control-label no-padding-right" })
+            @Html.LabelFor(model => model.GwInfo, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.TextAreaFor(model => model.ProInfo)
+                @Html.TextAreaFor(model => model.GwInfo)
             </div>
         </div>
         <div class="space-4"></div>
@@ -181,6 +160,6 @@
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var editor = new UE.ui.Editor();
-        editor.render("ProInfo");
+        editor.render("GwInfo");
     </script>
 }

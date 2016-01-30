@@ -9,18 +9,24 @@ namespace HanHe.Manage.Models.Project
     public class ProjectCreate
     {
         /// <summary>
+        /// 所属会员ID
+        /// </summary>	
+        [Display(Name = "会员编号")]
+        [Required(ErrorMessage = "请输入会员编号")]
+        public long MID { get; set; }
+        /// <summary>
         /// 项目标题
         /// </summary>		
         [Display(Name = "标题")]
         [Required(ErrorMessage = "请输入标题")]
-        [StringLength(200, MinimumLength = 4, ErrorMessage = "长度为4-200个字符")]
+        [StringLength(100, MinimumLength = 4, ErrorMessage = "长度为4-200个字符")]
         public string ProTitle { get; set; }
         /// <summary>
         /// 短标题
         /// </summary>
         [Display(Name = "短标题")]
         [Required(ErrorMessage = "请输入短标题")]
-        [StringLength(20, MinimumLength = 4, ErrorMessage = "长度为4-20个字符")]
+        [StringLength(10, MinimumLength = 4, ErrorMessage = "长度为4-20个字符")]
         public string ProTitleShort { get; set; }
         /// <summary>
         /// 项目文本内容
@@ -87,5 +93,15 @@ namespace HanHe.Manage.Models.Project
         /// </summary>		
         [Display(Name = "更新日期")]
         public DateTime UpdateDate { get; set; }
+        /// <summary>
+        /// 浏览计数
+        /// </summary>	
+        [Display(Name = "浏览计数")]
+        public int ViewCount { get; set; }
+        /// <summary>
+        /// 点赞计数
+        /// </summary>	
+        [Display(Name = "点赞计数")]
+        public int GoodCount { get; set; }
     }
 }

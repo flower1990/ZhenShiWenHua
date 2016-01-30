@@ -1,29 +1,27 @@
 ﻿using HanHe.BLL;
 using HanHe.IBLL;
+using HanHe.Manage.Models.ChuanJia;
 using HanHe.Manage.Models.Grid;
 using HanHe.Manage.Models.Helpers;
-using HanHe.Manage.Models.Project;
 using HanHe.Model;
 using HanHe.Util;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace HanHe.Manage.Controllers
 {
-    public class ProjectController : Controller
+    public class ChuanJiaController : Controller
     {
-        SysFun sysFun = new SysFun();
-        IZs_Project bProject = new BZs_Project();
+        IZs_ChuanJia bChuanJia = new BZs_ChuanJia();
 
         /// <summary>
         /// 行事历列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectList()
+        public ActionResult ChuanJiaList()
         {
             return View();
         }
@@ -34,13 +32,13 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         public JsonResult GetData(GridSettings grid)
         {
-            var query = bProject.Entities;
+            var query = bChuanJia.Entities;
 
             //filtring
-            query = GridFilter.Filtring<Zs_Project>(grid, query);
+            query = GridFilter.Filtring<Zs_ChuanJia>(grid, query);
 
             //sorting
-            query = query.OrderBy<Zs_Project>(grid.SortColumn, grid.SortOrder);
+            query = query.OrderBy<Zs_ChuanJia>(grid.SortColumn, grid.SortOrder);
 
             //count
             var count = query.Count();
@@ -57,20 +55,14 @@ namespace HanHe.Manage.Controllers
                 rows = (from item in data
                         select new
                         {
-                            ProjectID = item.ProjectID,
+                            CJID = item.CJID,
                             MID = item.MID,
-                            ProTitle = item.ProTitle,
-                            ProTitleShort = item.ProTitleShort,
-                            ProInfo = item.ProInfo,
-                            ImpropantWeight = item.ImpropantWeight,
-                            UrgentWeight = item.UrgentWeight,
-                            SortID = item.SortID,
-                            StartDate = item.StartDate,
-                            ExpectDate = item.ExpectDate,
-                            ProStatus = item.ProStatus,
-                            FinishedDate = item.FinishedDate,
-                            ProgressNum = item.ProgressNum,
+                            TypeID = item.TypeID,
+                            CJTitle = item.CJTitle,
+                            CJTitleShort = item.CJTitleShort,
+                            CJInfo = item.CJInfo,
                             OpenStatus = item.OpenStatus,
+                            SortID = item.SortID,
                             CreateDate = item.CreateDate,
                             UpdateDate = item.UpdateDate,
                             ViewCount = item.ViewCount,
@@ -86,18 +78,15 @@ namespace HanHe.Manage.Controllers
         /// 添加
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectCreate()
+        public ActionResult ChuanJiaCreate()
         {
-            ProjectCreate model = new ProjectCreate();
-            model.SortID = 0;
-            model.ProgressNum = 0;
-            model.StartDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            model.ExpectDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-
-            @ViewBag.ImpropantWeight = DicUtil.Instance.DicImpropantWeight(0);
-            @ViewBag.UrgentWeight = DicUtil.Instance.DicUrgentWeight(0);
+            @ViewBag.TypeID = DicUtil.Instance.DicCJType(0);
             @ViewBag.OpenStatus = DicUtil.Instance.DicOpenStatus(0);
-            @ViewBag.ProStatus = DicUtil.Instance.DicProStatus(0);
+
+            var model = new ChuanJiaCreate() 
+            {
+                SortID = 0,
+            };
 
             return View(model);
         }
@@ -109,17 +98,16 @@ namespace HanHe.Manage.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ProjectCreate(ProjectCreate model)
+        public ActionResult ChuanJiaCreate(ChuanJiaCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var item = new Zs_Project();
-            item = sysFun.InitialEntity<ProjectCreate, Zs_Project>(model, item);
+            var item = new Zs_ChuanJia();
+            item = SysFun.Instance.InitialEntity<ChuanJiaCreate, Zs_ChuanJia>(model, item);
             item.UpdateDate = DateTime.Now;
-            item.FinishedDate = DateTime.Now;
-            item = bProject.Add(item);
+            item = bChuanJia.Add(item);
 
-            if (item.ProjectID > 0) return RedirectToAction("ProjectList");
+            if (item.CJID > 0) return RedirectToAction("ChuanJiaList");
 
             return View(model);
         }
@@ -127,16 +115,14 @@ namespace HanHe.Manage.Controllers
         /// 编辑
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectEdit(int id = 0)
+        public ActionResult ChuanJiaEdit(int id = 0)
         {
-            var item = bProject.Find(id);
-            var model = new ProjectEdit();
-            model = sysFun.InitialEntity<Zs_Project, ProjectEdit>(item, model);
+            var item = bChuanJia.Find(id);
+            var model = new ChuanJiaEdit();
+            model = SysFun.Instance.InitialEntity<Zs_ChuanJia, ChuanJiaEdit>(item, model);
 
-            @ViewBag.ImpropantWeight = DicUtil.Instance.DicImpropantWeight(model.ImpropantWeight);
-            @ViewBag.UrgentWeight = DicUtil.Instance.DicUrgentWeight(model.UrgentWeight);
+            @ViewBag.TypeID = DicUtil.Instance.DicCJType(model.TypeID);
             @ViewBag.OpenStatus = DicUtil.Instance.DicOpenStatus(model.OpenStatus);
-            @ViewBag.ProStatus = DicUtil.Instance.DicProStatus(model.ProStatus);
 
             return View(model);
         }
@@ -148,16 +134,16 @@ namespace HanHe.Manage.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ProjectEdit(ProjectEdit model)
+        public ActionResult ChuanJiaEdit(ChuanJiaEdit model)
         {
             if (!ModelState.IsValid) { return View(model); }
 
-            Zs_Project item = bProject.Find(model.ProjectID);
-            item = sysFun.InitialEntity<ProjectEdit, Zs_Project>(model, item);
+            Zs_ChuanJia item = bChuanJia.Find(model.CJID);
+            item = SysFun.Instance.InitialEntity<ChuanJiaEdit, Zs_ChuanJia>(model, item);
             item.UpdateDate = DateTime.Now;
-            var result = bProject.Update(item);
+            var result = bChuanJia.Update(item);
 
-            if (result) return RedirectToAction("ProjectList");
+            if (result) return RedirectToAction("ChuanJiaList");
             else return View(model);
         }
         /// <summary>
@@ -165,11 +151,11 @@ namespace HanHe.Manage.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public JsonResult ProjectDelete(string id)
+        public JsonResult ChuanJiaDelete(string id)
         {
             string[] arrId = id.Split(',');
-            var result = bProject.Delete(f => arrId.Contains(f.ProjectID.ToString()));
+            var result = bChuanJia.Delete(f => arrId.Contains(f.CJID.ToString()));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-    }
+	}
 }

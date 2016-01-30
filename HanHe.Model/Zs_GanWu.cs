@@ -11,7 +11,6 @@ namespace HanHe.Model
     //Zs_GanWu
     public class Zs_GanWu
     {
-
         /// <summary>
         /// GwID
         /// </summary>		
@@ -78,6 +77,10 @@ namespace HanHe.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string SmsStatusName { get; set; }
         /// <summary>
+        /// 排序字段：倒序排列
+        /// </summary>
+        public int SortID { get; set; }
+        /// <summary>
         /// 创建日期
         /// </summary>		
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
@@ -87,11 +90,11 @@ namespace HanHe.Model
         /// </summary>		
         public DateTime UpdateDate { get; set; }
         /// <summary>
-        /// ViewCount
+        /// 浏览计数
         /// </summary>		
         public int ViewCount { get; set; }
         /// <summary>
-        /// GoodCount
+        /// 点赞计数
         /// </summary>		
         public int GoodCount { get; set; }
 

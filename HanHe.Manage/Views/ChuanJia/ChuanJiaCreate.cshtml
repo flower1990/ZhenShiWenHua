@@ -1,0 +1,121 @@
+﻿@model HanHe.Manage.Models.ChuanJia.ChuanJiaCreate
+@{
+    ViewBag.Title = "添加传家有道";
+    ViewBag.Forms = "传家有道列表";
+    ViewBag.Elements = "添加传家有道";
+    ViewBag.FormsUrl = Url.Action("ChuanJiaList", "ChuanJia");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ChuanJiaCreate", "ChuanJia", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MID, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.MID, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.MID, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CJTitle, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.CJTitle, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.CJTitle, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CJTitleShort, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.CJTitleShort, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.CJTitleShort, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeID, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OpenStatus, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.DropDownList("OpenStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ViewCount, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.ViewCount, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.ViewCount, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GoodCount, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.GoodCount, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.GoodCount, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SortID, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                <div class="col-xs-10 col-sm-5 no-padding-left">
+                    @Html.EditorFor(model => model.SortID)
+                </div>
+                @Html.ValidationMessageFor(model => model.SortID, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CJInfo, new { @class = "col-sm-2 control-label no-padding-right" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.CJInfo)
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    提交
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <div class="hr hr-24"></div>
+    </div>
+}
+
+@section Scripts {
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var editor = new UE.ui.Editor();
+        editor.render("CJInfo");
+    </script>
+}

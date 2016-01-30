@@ -44,11 +44,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Category01, new { @class = "col-sm-1 control-label no-padding-right" })
             <div class="col-sm-11">
-                @*<select class="col-xs-10 col-sm-5 chosen-select" data-placeholder="Choose a Country...">
-                    <option value="0">芒种</option>
-                    <option value="1">夏至</option>
-                    <option value="2">小暑</option>
-                </select>*@
                 @Html.DropDownList("Category01", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
             </div>
         </div>
@@ -73,10 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GxStatus, new { @class = "col-sm-1 control-label no-padding-right" })
             <div class="col-sm-11">
-                <select class="col-xs-10 col-sm-5" id="form-field-select-2" multiple="multiple">
-                    <option value="0">未发布</option>
-                    <option value="1" selected="selected">已发布</option>
-                </select>
+                @Html.DropDownList("GxStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
             </div>
         </div>
         <div class="space-4"></div>
@@ -84,9 +76,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GxInfo, new { @class = "col-sm-1 control-label no-padding-right" })
             <div class="col-sm-11">
-                <!-- 加载编辑器的容器 -->
-                <script id="GxInfo" name="GxInfo" type="text/plain">
-                </script>
+                @Html.TextAreaFor(model => model.GxInfo)
             </div>
         </div>
         <div class="space-4"></div>
@@ -117,8 +107,7 @@
     <script type="text/javascript" src="~/Content/ueditor/ueditor.all.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
-        var ue = UE.getEditor('GxInfo', {
-            autoHeight: false
-        });
+        var editor = new UE.ui.Editor();
+        editor.render("GxInfo");
     </script>
 }

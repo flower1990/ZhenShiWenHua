@@ -12,18 +12,21 @@ namespace HanHe.Manage.Models.GuoXue
         /// 关键词
         /// </summary>		
         [Display(Name = "关键词")]
-        [Required(ErrorMessage = "必填")]
+        [Required(ErrorMessage = "请输入关键字")]
         public string Keywords { get; set; }
         /// <summary>
         /// 标题
         /// </summary>		
         [Display(Name = "标题")]
-        [Required(ErrorMessage = "必填")]
+        [Required(ErrorMessage = "请输入标题")]
+        [StringLength(100, MinimumLength = 4, ErrorMessage = "长度为4-200个字符")]
         public string GxTitle { get; set; }
         /// <summary>
         /// 短标题
         /// </summary>		
         [Display(Name = "短标题")]
+        [Required(ErrorMessage = "请输入短标题")]
+        [StringLength(10, MinimumLength = 4, ErrorMessage = "长度为4-20个字符")]
         public string GxTitleShort { get; set; }
         /// <summary>
         /// 内容

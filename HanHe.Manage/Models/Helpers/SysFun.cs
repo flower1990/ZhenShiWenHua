@@ -1,8 +1,11 @@
-﻿using System;
+﻿using HanHe.BLL;
+using HanHe.IBLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Mvc;
 
 namespace HanHe.Manage.Models.Helpers
 {
@@ -13,6 +16,22 @@ namespace HanHe.Manage.Models.Helpers
     }
     public class SysFun
     {
+        private static SysFun _instance;
+        public static SysFun Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SysFun();
+                }
+                return _instance;
+            }
+        }
+
+        IZs_ChuanJia bChuanJia = new BZs_ChuanJia();
+        IZs_Member bMember = new BZs_Member();
+
         /// <summary>
         /// 初始化实体类
         /// </summary>
@@ -48,6 +67,23 @@ namespace HanHe.Manage.Models.Helpers
                     from t in targetProperties
                     where s.Name == t.Name && s.CanRead && t.CanWrite && s.PropertyType == t.PropertyType
                     select new PropertyMapper { SourceProperty = s, TargetProperty = t }).ToList();
+        }
+        /// <summary>
+        /// 获取传家类型
+        /// </summary>
+        /// <returns></returns>
+        public SelectList DicMember(int selectedValue)
+        {
+            var listItem = new List<SelectListItem>();
+            var memberList = bMember.Entities.Select(f => new { MID = f.MID, NickName = f.NickName });
+            foreach (var item in memberList)
+            {
+                var selectItem = new SelectListItem() { Value = item.MID.ToString(), Text = item.NickName };
+                listItem.Add(selectItem);
+            }
+
+            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
+            return selectList;
         }
     }
 }

@@ -1,26 +1,18 @@
-﻿@model HanHe.Manage.Models.Project.ProjectCreate
+﻿@model HanHe.Manage.Models.Project.ProjectEdit
 @{
-    ViewBag.Title = "添加行事历";
+    ViewBag.Title = "编辑行事历";
     ViewBag.Forms = "行事历列表";
-    ViewBag.Elements = "添加行事历";
+    ViewBag.Elements = "编辑行事历";
     ViewBag.FormsUrl = Url.Action("ProjectList", "Project");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("ProjectCreate", "Project", FormMethod.Post, htmlAttributes: new { id = "form1" }))
+@using (Html.BeginForm("ProjectEdit", "Project", FormMethod.Post, htmlAttributes: new { id = "form1" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MID, new { @class = "col-sm-2 control-label no-padding-right" })
-            <div class="col-sm-10">
-                @Html.TextBoxFor(model => model.MID, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
-                @Html.ValidationMessageFor(model => model.MID, "", htmlAttributes: new { @class = "help-inline col-xs-12 col-sm-7" })
-            </div>
-        </div>
-        <div class="space-4"></div>
+        @Html.HiddenFor(model => model.ProjectID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.MID, new { @class = "col-sm-2 control-label no-padding-right" })
@@ -97,7 +89,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProStatus, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.DropDownList("ProStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+                @Html.DropDownList("ProStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
             </div>
         </div>
         <div class="space-4"></div>
@@ -105,7 +97,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OpenStatus, new { @class = "col-sm-2 control-label no-padding-right" })
             <div class="col-sm-10">
-                @Html.DropDownList("OpenStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5 chosen-select" })
+                @Html.DropDownList("OpenStatus", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5" })
             </div>
         </div>
         <div class="space-4"></div>
