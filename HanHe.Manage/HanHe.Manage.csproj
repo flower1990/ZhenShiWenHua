@@ -162,19 +162,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Config.cs" />
+    <Content Include="App_Code\ConfigHandler.cs" />
+    <Content Include="App_Code\CrawlerHandler.cs" />
+    <Content Include="App_Code\Handler.cs" />
+    <Content Include="App_Code\ListFileHandler.cs" />
+    <Content Include="App_Code\NotSupportedHandler.cs" />
+    <Content Include="App_Code\PathFormater.cs" />
+    <Content Include="App_Code\UploadHandler.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\HtmlHelperExtensions.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\Config.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\ConfigHandler.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\CrawlerHandler.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\Handler.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\ListFileHandler.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\NotSupportedHandler.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\PathFormater.cs" />
-    <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\ChuanJiaController.cs" />
     <Compile Include="Controllers\DicController.cs" />
     <Compile Include="Controllers\FCircleController.cs" />
@@ -255,19 +255,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\fullcalendar.css" />
     <Content Include="Content\css\images\loading.gif" />
-    <Content Include="Content\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\css\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\css\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\css\images\ui-bg_glass_75_ffffff_1x400.png" />
-    <Content Include="Content\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\css\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
     <Content Include="Content\css\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\css\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\css\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\css\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\css\images\ui-icons_f6cf3b_256x240.png" />
     <Content Include="Content\css\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Content\css\jquery-ui-1.10.3.full.min.css" />
     <Content Include="Content\css\jquery.gritter.css" />
@@ -326,6 +314,7 @@
     <Content Include="Content\js\html5shiv.js" />
     <Content Include="Content\js\jqGrid\i18n\grid.locale-en.js" />
     <Content Include="Content\js\jqGrid\jquery.jqGrid.min.js" />
+    <Content Include="config.json" />
     <None Include="Content\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\js\jquery-1.10.2.js" />
     <Content Include="Content\js\jquery-1.10.2.min.js" />
@@ -527,10 +516,6 @@
     <Content Include="Content\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="Content\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="Content\ueditor\lang\zh-cn\zh-cn.js" />
-    <Content Include="Content\ueditor\net\Bin\Newtonsoft.Json.dll" />
-    <Content Include="Content\ueditor\net\Bin\Newtonsoft.Json.pdb" />
-    <Content Include="Content\ueditor\net\Bin\Newtonsoft.Json.xml" />
-    <Content Include="Content\ueditor\net\net.sln" />
     <Content Include="Content\ueditor\themes\default\css\ueditor.css" />
     <Content Include="Content\ueditor\themes\default\css\ueditor.min.css" />
     <Content Include="Content\ueditor\themes\default\dialogbase.css" />
@@ -639,14 +624,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\font\fontawesome-webfont.woff" />
     <Content Include="Content\css\images\Thumbs.db" />
-    <Content Include="Content\ueditor\net\config.json" />
-    <Content Include="Content\ueditor\net\controller.ashx" />
-    <Content Include="Content\ueditor\net\README.md" />
-    <Content Include="Content\ueditor\net\Web.config" />
     <Content Include="Content\ueditor\third-party\jquery-1.10.2.min.map" />
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="controller.ashx" />
     <None Include="Properties\PublishProfiles\manage.pubxml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -690,6 +672,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="upload\" />
     <Folder Include="Views\MemorialDay\" />
   </ItemGroup>
   <ItemGroup>
