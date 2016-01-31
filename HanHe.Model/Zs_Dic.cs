@@ -55,8 +55,18 @@ namespace HanHe.Model
         /// </summary>	
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreateDate { get; set; }
+        /// <summary>
+        /// 左节点
+        /// </summary>
         public int lft { get; set; }
+        /// <summary>
+        /// 右节点
+        /// </summary>
         public int rgt { get; set; }
+        /// <summary>
+        /// 国学集合
+        /// </summary>
+        public virtual ICollection<Zs_GuoXue> GuoXue { get; set; }
 
     }
 }

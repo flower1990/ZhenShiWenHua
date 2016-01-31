@@ -34,40 +34,24 @@ namespace HanHe.Manage.Models.GuoXue
         [Display(Name = "内容")]
         public string GxInfo { get; set; }
         /// <summary>
-        /// 类别一
+        /// 字典编号
         /// </summary>		
-        [Display(Name = "类别一")]
-        public int Category01 { get; set; }
-        /// <summary>
-        /// 类别二
-        /// </summary>		
-        [Display(Name = "类别二")]
-        public int Category02 { get; set; }
-        /// <summary>
-        /// 类别三
-        /// </summary>		
-        [Display(Name = "类别三")]
-        public int Category03 { get; set; }
-        /// <summary>
-        /// 修改日期
-        /// </summary>		
-        public DateTime UpdateDate { get; set; }
+        [Display(Name = "分类")]
+        public int DicID { get; set; }
         /// <summary>
         /// 状态：0、未发布；1、已发布；
         /// </summary>		
         [Display(Name = "状态")]
-        public bool GxStatus { get; set; }
-        /// <summary>
-        /// 发布日期
-        /// </summary>		
-        public DateTime PublishDate { get; set; }
+        public int GxStatus { get; set; }
         /// <summary>
         /// 浏览统计
         /// </summary>		
+        [Display(Name = "浏览统计")]
         public int ViewCount { get; set; }
         /// <summary>
         /// 点赞统计
-        /// </summary>		
+        /// </summary>	
+        [Display(Name = "点赞统计")]
         public int GoodCount { get; set; }
     }
 }

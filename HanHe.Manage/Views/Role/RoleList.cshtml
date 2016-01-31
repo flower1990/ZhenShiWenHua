@@ -55,10 +55,7 @@
                 { name: 'RoleID', index: 'RoleID', hidden: true, width: 90, editable: true, edittype: "text" },
                 { name: 'RoleCode', index: 'RoleCode', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                 { name: 'RoleName', index: 'RoleName', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                {
-                    name: 'RoleProperty', index: 'RoleProperty', width: 90, editable: true, edittype: "select", formatter: 'select',
-                    editoptions: { value: roleList }, searchoptions: { sopt: ['eq', 'ne', 'cn'] }
-                },
+                { name: 'RoleProperty', index: 'RoleProperty', width: 90, editable: true, edittype: "select", formatter: 'select', editoptions: { value: roleList }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                 { name: 'Remark', index: 'Remark', width: 90, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "20" }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                 { name: 'CreateDate', index: 'CreateDate', width: 90, editable: true, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
             ],

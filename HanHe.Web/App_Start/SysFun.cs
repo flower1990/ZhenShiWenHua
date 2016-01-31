@@ -29,6 +29,19 @@ namespace HanHe.Web
     }
     public class SysFun
     {
+        private static SysFun _instance;
+        public static SysFun Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SysFun();
+                }
+                return _instance;
+            }
+        }
+
         /// <summary>
         /// 获取表单数据
         /// </summary>

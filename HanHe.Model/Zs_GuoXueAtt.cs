@@ -18,13 +18,13 @@ namespace HanHe.Model
         [Key]
         public long AttID { get; set; }
         /// <summary>
-        /// 会员编号
-        /// </summary>
-        public long MID { get; set; }
-        /// <summary>
         /// 国学信息ID
         /// </summary>		
         public long GXID { get; set; }
+        /// <summary>
+        /// 国学信息
+        /// </summary>
+        public virtual Zs_GuoXue GuoXue { get; set; }
         /// <summary>
         /// 附件类别：1、图片；2、视频；3、音频；4、文档；5、Flash
         /// </summary>		

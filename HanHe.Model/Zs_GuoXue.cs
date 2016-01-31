@@ -11,7 +11,6 @@ namespace HanHe.Model
     //Zs_GuoXue
     public class Zs_GuoXue
     {
-
         /// <summary>
         /// GxID
         /// </summary>		
@@ -34,17 +33,13 @@ namespace HanHe.Model
         /// </summary>		
         public string GxInfo { get; set; }
         /// <summary>
-        /// 类别一
+        /// 字典编号
         /// </summary>		
-        public int Category01 { get; set; }
+        public int DicID { get; set; }
         /// <summary>
-        /// 类别二
-        /// </summary>		
-        public int Category02 { get; set; }
-        /// <summary>
-        /// 类别三
-        /// </summary>		
-        public int Category03 { get; set; }
+        /// 字典信息
+        /// </summary>
+        public virtual Zs_Dic Dic { get; set; }
         /// <summary>
         /// 创建日期
         /// </summary>		
@@ -75,6 +70,10 @@ namespace HanHe.Model
         /// 点赞统计
         /// </summary>		
         public int GoodCount { get; set; }
+        /// <summary>
+        /// 国学集合
+        /// </summary>
+        public virtual ICollection<Zs_GuoXueAtt> GuoXueAtt { get; set; }
 
     }
 }

@@ -32,22 +32,6 @@
     <li>
         <a href="#" class="dropdown-toggle">
             <i class="icon-desktop"></i>
-            <span class="menu-text"> 关键词管理 </span>
-
-            <b class="arrow icon-angle-down"></b>
-        </a>
-
-        <ul class="submenu">
-            <li>
-                @*@Ajax.RawActionLink("<i class='icon-double-angle-right'></i>关键词列表", "KeywordsList", "Keywords", null, new AjaxOptions { UpdateTargetId = "content", InsertionMode = InsertionMode.Replace }, null)*@
-                @Html.RawActionLink("<i class='icon-double-angle-right'></i>关键词列表", "KeywordsList", "Keywords", null, null)
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <a href="#" class="dropdown-toggle">
-            <i class="icon-desktop"></i>
             <span class="menu-text"> 会员管理 </span>
 
             <b class="arrow icon-angle-down"></b>
@@ -64,22 +48,6 @@
     <li>
         <a href="#" class="dropdown-toggle">
             <i class="icon-desktop"></i>
-            <span class="menu-text"> 知识库管理 </span>
-
-            <b class="arrow icon-angle-down"></b>
-        </a>
-
-        <ul class="submenu">
-            <li>
-                @*@Ajax.RawActionLink("<i class='icon-double-angle-right'></i>国学列表", "GuoXueList", "GuoXue", null, new AjaxOptions { UpdateTargetId = "content", InsertionMode = InsertionMode.Replace }, null)*@
-                @Html.RawActionLink("<i class='icon-double-angle-right'></i>国学列表", "GuoXueList", "GuoXue", null, null)
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <a href="#" class="dropdown-toggle">
-            <i class="icon-desktop"></i>
             <span class="menu-text"> 字典管理 </span>
 
             <b class="arrow icon-angle-down"></b>
@@ -88,6 +56,38 @@
         <ul class="submenu">
             <li>
                 @Html.RawActionLink("<i class='icon-double-angle-right'></i>字典列表", "DicList", "Dic", null, null)
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-desktop"></i>
+            <span class="menu-text"> 关键词管理 </span>
+
+            <b class="arrow icon-angle-down"></b>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                @*@Ajax.RawActionLink("<i class='icon-double-angle-right'></i>关键词列表", "KeywordsList", "Keywords", null, new AjaxOptions { UpdateTargetId = "content", InsertionMode = InsertionMode.Replace }, null)*@
+                @Html.RawActionLink("<i class='icon-double-angle-right'></i>关键词列表", "KeywordsList", "Keywords", null, null)
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-desktop"></i>
+            <span class="menu-text"> 国学管理 </span>
+
+            <b class="arrow icon-angle-down"></b>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                @*@Ajax.RawActionLink("<i class='icon-double-angle-right'></i>国学列表", "GuoXueList", "GuoXue", null, new AjaxOptions { UpdateTargetId = "content", InsertionMode = InsertionMode.Replace }, null)*@
+                @Html.RawActionLink("<i class='icon-double-angle-right'></i>国学列表", "GuoXueList", "GuoXue", null, null)
             </li>
         </ul>
     </li>

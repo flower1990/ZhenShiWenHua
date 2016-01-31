@@ -28,8 +28,8 @@
 
 <form id="form1">
     <div class="alert alert-info">
-        <a id="dic-create" class="btn btn-primary" href="@Url.Action("DicCreate", "Dic")"><i class='icon-plus align-top bigger-125'></i>添加子节点</a>
-        <a id="dic-create" class="btn btn-primary" href="@Url.Action("DicCreate", "Dic")"><i class='icon-plus align-top bigger-125'></i>添加根节点</a>
+        <a id="dic-create" class="btn btn-primary" href="@Url.Action("DicCreateChildNode", "Dic")"><i class='icon-plus align-top bigger-125'></i>添加子节点</a>
+        @*<a id="dic-create" class="btn btn-primary" href="@Url.Action("DicCreateRootNode", "Dic")"><i class='icon-plus align-top bigger-125'></i>添加根节点</a>*@
         <a id="dic-edit" class="btn btn-purple" href="#"><i class='icon-pencil align-top bigger-125'></i>修改</a>
         <a id="dic-delete" class="btn btn-danger" href="#"><i class='icon-remove align-top bigger-125'></i>删除</a>
         <div id="dialog-confirm" class="hide">

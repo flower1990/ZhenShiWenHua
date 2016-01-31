@@ -89,14 +89,14 @@ namespace HanHe.Manage.Controllers
             @ViewBag.OpenStatus = DicUtil.Instance.DicOpenStatus(0);
             @ViewBag.GwStatus = DicUtil.Instance.DicGwStatus(0);
             @ViewBag.SmsStatus = DicUtil.Instance.DicSmsStatus(0);
-            
+
             var model = new GanWuCreate()
             {
                 GotoDate = DateTime.Now,
                 PostDate = DateTime.Now,
                 SortID = 0,
             };
-            
+
             return View(model);
         }
         /// <summary>
@@ -109,24 +109,16 @@ namespace HanHe.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult GanWuCreate(GanWuCreate model)
         {
-            try
-            {
-                if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return View(model);
 
-                var item = new Zs_GanWu();
-                item = SysFun.Instance.InitialEntity<GanWuCreate, Zs_GanWu>(model, item);
-                item.UpdateDate = DateTime.Now;
-                item = bGanWu.Add(item);
+            var item = new Zs_GanWu();
+            item = SysFun.Instance.InitialEntity<GanWuCreate, Zs_GanWu>(model, item);
+            item.UpdateDate = DateTime.Now;
+            item = bGanWu.Add(item);
 
-                if (item.GwID > 0) return RedirectToAction("GanWuList");
+            if (item.GwID > 0) return RedirectToAction("GanWuList");
 
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
+            return View(model);
         }
         /// <summary>
         /// 编辑
@@ -176,5 +168,5 @@ namespace HanHe.Manage.Controllers
             var result = bGanWu.Delete(f => arrId.Contains(f.GwID.ToString()));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-	}
+    }
 }

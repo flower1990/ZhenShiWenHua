@@ -39,6 +39,7 @@ namespace HanHe.Manage.Models.Dic
         /// 排序字段，升序排序
         /// </summary>		
         [Display(Name = "排序编号")]
+        [Required(ErrorMessage = "请输入排序编号")]
         public int SortID { get; set; }
         /// <summary>
         /// 说明

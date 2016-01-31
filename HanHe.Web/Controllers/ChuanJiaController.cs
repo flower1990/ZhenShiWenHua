@@ -29,7 +29,7 @@ namespace HanHe.Web.Controllers
         /// <summary>
         /// 获取附件地址
         /// </summary>
-        /// <param name="projectID"></param>
+        /// <param name="cjID">传家编号</param>
         /// <returns></returns>
         public string GetAttUrl(long cjID)
         {

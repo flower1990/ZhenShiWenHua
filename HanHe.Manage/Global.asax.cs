@@ -25,10 +25,10 @@ namespace HanHe.Manage
         /// <param name="e"></param>
         protected void Application_Error(object sender, EventArgs e)
         {
-            if (Server.GetLastError() == null) return;
-            Exception ex = Server.GetLastError().GetBaseException();
-            LogHelper.LogWriterFromFilter(ex);
-            this.Server.ClearError();
+            //if (Server.GetLastError() == null) return;
+            //Exception ex = Server.GetLastError().GetBaseException();
+            //LogHelper.LogWriterFromFilter(ex);
+            //this.Server.ClearError();
             //this.Response.Redirect("~/Error/Index");
 
         }

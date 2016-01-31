@@ -146,13 +146,32 @@ namespace HanHe.Manage.Controllers
             return Json(hierarchyRows, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
+        /// 获取字典
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetDicList()
+        {
+            var dic = bDic.Entities
+                .Select(f => new 
+                {
+                    DicID = f.DicID,
+                    DicName = f.DicName
+                });
+
+            return Json(dic, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
         /// 添加子节点
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         public ActionResult DicCreateChildNode()
         {
+            var model = new DicCreateChildNode();
+            model.SortID = 0;
+
             @ViewBag.DicProperty = GetPropertyList(0);
+
             return View();
         }
         /// <summary>
@@ -201,14 +220,14 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DicCreateRootNode(DicCreateChildNode model)
+        public ActionResult DicCreateRootNode(DicCreateRootNode model)
         {
             if (!ModelState.IsValid) { return View(model); }
 
             string sql = "exec SP_DicCreate @DicID,@DicCode,@DicName,@DicNameEn,@DicProperty,@ParentID,@SortID,@Remark,@isLeaf";
             SqlParameter[] param = new SqlParameter[]
             {
-                new SqlParameter("@DicID", model.ParentID),
+                new SqlParameter("@DicID", 8),
                 new SqlParameter("@DicCode", model.DicCode),
                 new SqlParameter("@DicName", model.DicName),
                 new SqlParameter("@DicNameEn", model.DicNameEn),

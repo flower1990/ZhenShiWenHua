@@ -621,7 +621,7 @@
             <summary>
             获取附件地址
             </summary>
-            <param name="projectID"></param>
+            <param name="cjID">传家编号</param>
             <returns></returns>
         </member>
         <member name="M:HanHe.Web.Controllers.ChuanJiaController.UpdateAttList(HanHe.Model.Zs_ChuanJia)">
@@ -663,6 +663,31 @@
             根据传家ID查找
             </summary>
             <param name="id">传家有道编号</param>
+            <returns>传家有道信息和附件列表</returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.FCircleController">
+            <summary>
+            朋友圈
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.FCircleController.UpdateAttList(HanHe.Model.Zs_FCircle)">
+            <summary>
+            更新附件列表
+            </summary>
+            <param name="fcircle">传家信息</param>
+        </member>
+        <member name="M:HanHe.Web.Controllers.FCircleController.FCircleCreate(HanHe.Web.Models.FCircleCreate)">
+            <summary>
+            添加朋友圈
+            </summary>
+            <param name="model">朋友圈信息</param>
+            <returns>朋友圈信息和附件列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.FCircleController.GetFCircleAll(System.Int64,System.Int32,System.Int32)">
+            <summary>
+            获取传家有道列表
+            </summary>
+            <param name="mid">会员编号</param>
             <returns>传家有道信息和附件列表</returns>
         </member>
         <member name="T:HanHe.Web.Controllers.GanWuAttController">
@@ -734,6 +759,32 @@
             </summary>
             <param name="id">感悟未来编号</param>
             <returns>感悟未来和附件信息</returns>
+        </member>
+        <member name="T:HanHe.Web.Controllers.GuoXueController">
+            <summary>
+            国学
+            </summary>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GuoXueController.GetAttUrl(System.Collections.Generic.ICollection{HanHe.Model.Zs_GuoXueAtt})">
+            <summary>
+            获取附件图片
+            </summary>
+            <param name="att"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GuoXueController.GetGuoXueByCode(System.String)">
+            <summary>
+            根据字典编码获取知识库列表
+            </summary>
+            <param name="code">字典编码</param>
+            <returns>知识库列表</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GuoXueController.GetLunarHolDay(System.String)">
+            <summary>
+            阴阳历转换
+            </summary>
+            <param name="datetime">日期</param>
+            <returns>农历日期</returns>
         </member>
         <member name="M:HanHe.Web.Controllers.HomeController.Login">
             <summary>
@@ -833,6 +884,21 @@
             <param name="mobile">手机号</param>
             <param name="code">验证码</param>
             <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.GetMemberInfo(System.Int64)">
+            <summary>
+            获取会员昵称和头像
+            </summary>
+            <param name="mid">会员编号</param>
+            <returns>昵称和头像</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.MemberController.GetMemberInfo(System.String,System.Int32)">
+            <summary>
+            获取会员昵称和头像
+            </summary>
+            <param name="para">会员账号和昵称</param>
+            <param name="type">类型：1.账号；2.昵称；</param>
+            <returns>昵称和头像</returns>
         </member>
         <member name="T:HanHe.Web.Controllers.ProjectAttController">
             <summary>
@@ -1028,6 +1094,36 @@
         <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.UpdateDate">
             <summary>
             更新日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.FCircleCreate.MID">
+            <summary>
+            所属会员ID
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.FCircleCreate.FCTitle">
+            <summary>
+            分享标题
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.FCircleCreate.FCInfo">
+            <summary>
+            分享原创文本内容
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.FCircleCreate.FCUrl">
+            <summary>
+            分享的链接
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.FCircleCreate.ViewCount">
+            <summary>
+            浏览量统计
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.FCircleCreate.GoodCount">
+            <summary>
+            点赞统计
             </summary>		
         </member>
         <member name="P:HanHe.Web.Models.GanWuAttModel.AttID">

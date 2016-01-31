@@ -4,6 +4,7 @@ using HanHe.Manage.Models.Grid;
 using HanHe.Manage.Models.GuoXue;
 using HanHe.Manage.Models.Helpers;
 using HanHe.Model;
+using HanHe.Util;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -18,33 +19,6 @@ namespace HanHe.Manage.Controllers
         SysFun sysFun = new SysFun();
         IZs_GuoXue bGuoXue = new BZs_GuoXue();
 
-        public SelectList GetCategory01List(int selectedValue)
-        {
-            List<SelectListItem> listItem = new List<SelectListItem>() 
-            {
-                new SelectListItem(){ Value = "0", Text = "冬至"},
-                new SelectListItem(){ Value = "1", Text = "小寒"},
-                new SelectListItem(){ Value = "1", Text = "大寒"},
-                new SelectListItem(){ Value = "1", Text = "立春"},
-                new SelectListItem(){ Value = "1", Text = "雨水"},
-                new SelectListItem(){ Value = "1", Text = "惊蛰"},
-                new SelectListItem(){ Value = "1", Text = "春分"},
-                new SelectListItem(){ Value = "1", Text = "清明"},
-            };
-            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
-            return selectList;
-        }
-
-        public SelectList GetGxStatusList(int selectedValue)
-        {
-            List<SelectListItem> listItem = new List<SelectListItem>() 
-            {
-                new SelectListItem(){ Value = "0", Text = "未发布"},
-                new SelectListItem(){ Value = "1", Text = "已发布"},
-            };
-            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
-            return selectList;
-        }
         /// <summary>
         /// 国学列表
         /// </summary>
@@ -88,9 +62,7 @@ namespace HanHe.Manage.Controllers
                             GxTitle = item.GxTitle,
                             GxTitleShort = item.GxTitleShort,
                             GxInfo = item.GxInfo,
-                            Category01 = item.Category01,
-                            Category02 = item.Category02,
-                            Category03 = item.Category03,
+                            DicID = item.DicID,
                             CreateDate = item.CreateDate,
                             UpdateDate = item.UpdateDate,
                             GxStatusName = item.GxStatusName,
@@ -110,11 +82,11 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         public ActionResult GuoXueCreate()
         {
-            @ViewBag.Category01 = GetCategory01List(0);
-            @ViewBag.Category02 = GetCategory01List(0);
-            @ViewBag.Category03 = GetCategory01List(0);
+            var model = new GuoXueCreate();
 
-            return View();
+            @ViewBag.GxStatus = DicUtil.Instance.DicGxStatus(0);
+
+            return View(model);
         }
         /// <summary>
         /// 添加
@@ -148,10 +120,7 @@ namespace HanHe.Manage.Controllers
             var model = new GuoXueEdit();
             model = sysFun.InitialEntity<Zs_GuoXue, GuoXueEdit>(item, model);
 
-            @ViewBag.Category01 = GetCategory01List(0);
-            @ViewBag.Category02 = GetCategory01List(0);
-            @ViewBag.Category03 = GetCategory01List(0);
-            @ViewBag.GxStatus = GetGxStatusList(1);
+            @ViewBag.GxStatus = DicUtil.Instance.DicGxStatus(model.GxStatus);
 
             return View(model);
         }
@@ -162,12 +131,14 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult GuoXueEdit(GuoXueEdit model)
         {
             if (!ModelState.IsValid) { return View(model); }
 
             Zs_GuoXue item = bGuoXue.Find(model.GxID);
             item = sysFun.InitialEntity<GuoXueEdit, Zs_GuoXue>(model, item);
+            item.UpdateDate = DateTime.Now;
             var result = bGuoXue.Update(item);
 
             if (result) return RedirectToAction("GuoXueList");
@@ -178,15 +149,11 @@ namespace HanHe.Manage.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public JsonResult GuoXueDelete(int id)
+        public JsonResult GuoXueDelete(string id)
         {
-            string sql = "exec SP_DicDelete @DicID";
-            SqlParameter[] param = new SqlParameter[]
-            {
-                new SqlParameter("@DicID", id),
-            };
+            string[] arrId = id.Split(',');
 
-            var result = bGuoXue.Delete(sql, param);
+            var result = bGuoXue.Delete(f => arrId.Contains(f.GxID.ToString()));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

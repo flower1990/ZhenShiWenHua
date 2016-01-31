@@ -151,7 +151,21 @@ namespace HanHe.Util
             SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
             return selectList;
         }
-        
+        /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <returns></returns>
+        public SelectList DicGxStatus(int selectedValue)
+        {
+            List<SelectListItem> listItem = new List<SelectListItem>() 
+            {
+                new SelectListItem(){ Value = "0", Text = "未发布"},
+                new SelectListItem(){ Value = "1", Text = "已发布"},                 
+            };
+
+            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
+            return selectList;
+        }
         
     }
 }

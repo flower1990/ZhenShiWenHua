@@ -11,6 +11,23 @@
     .ui-jqgrid tr.jqgrow td {
         border: 0px none;
     }
+    .ui-icon {
+        width: 16px;
+        height: 16px;
+        background-image: url("@Url.Content("~/Content/css/images/ui-icons_222222_256x240.png")");
+    }
+
+    .ui-icon-triangle-1-e {
+        background-position: -32px -16px;
+    }
+
+    .ui-icon-triangle-1-s {
+        background-position: -64px -16px;
+    }
+
+    .ui-icon-radio-off {
+        background-position: -112px -144px;
+    }
 </style>
 
 @using (Html.BeginForm("DicCreateChildNode", "Dic", FormMethod.Post, htmlAttributes: new { id = "form1" }))

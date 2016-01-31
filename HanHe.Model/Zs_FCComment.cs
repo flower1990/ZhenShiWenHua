@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ namespace HanHe.Model
     //Zs_FCComment
     public class Zs_FCComment
     {
-
         /// <summary>
         /// CommentID
         /// </summary>		
@@ -35,6 +35,7 @@ namespace HanHe.Model
         /// <summary>
         /// CTypeName
         /// </summary>		
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string CTypeName { get; set; }
         /// <summary>
         /// 评论内容
@@ -43,6 +44,7 @@ namespace HanHe.Model
         /// <summary>
         /// 评论日期
         /// </summary>		
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreateDate { get; set; }
 
     }

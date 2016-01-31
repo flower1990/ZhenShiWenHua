@@ -345,5 +345,56 @@ namespace HanHe.Web.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// 获取会员昵称和头像
+        /// </summary>
+        /// <param name="mid">会员编号</param>
+        /// <returns>昵称和头像</returns>
+        [HttpGet, Route("GetMemberInfo")]
+        public IHttpActionResult GetMemberInfo([FromUri]long mid)
+        {
+            var member = bMember
+                .Entities
+                .Where(f => f.MID == mid)
+                .Select(f => new
+                {
+                    NickName = f.NickName,
+                    IconUrl = f.IconUrl
+                });
+
+            return Ok(member);
+        }
+        /// <summary>
+        /// 获取会员昵称和头像
+        /// </summary>
+        /// <param name="para">会员账号和昵称</param>
+        /// <param name="type">类型：1.账号；2.昵称；</param>
+        /// <returns>昵称和头像</returns>
+        [HttpGet, Route("GetMemberInfo")]
+        public IHttpActionResult GetMemberInfo([FromUri]string para, int type)
+        {
+            var member = new Zs_Member();
+            var dic = new Dictionary<string, string>();
+
+            switch (type)
+            {
+                case 1:
+                    member = bMember.Find(f => f.MCode == para);
+                    break;
+                case 2:
+                    member = bMember.Find(f => f.NickName == para);
+                    break;
+            }
+
+            if (member == null)
+            {
+                dic.Add("result", "没有搜索到用户");
+                return Ok(dic);
+            }
+
+            return Ok(member);
+        }
+
+
     }
 }

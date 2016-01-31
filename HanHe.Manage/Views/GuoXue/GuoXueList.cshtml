@@ -9,9 +9,27 @@
 
 <form id="form1">
     <div class="alert alert-info">
-        @Html.RawActionLink("<i class='icon-plus align-top bigger-125'></i>添加", "GuoXueCreate", "GuoXue", null, new { @class = "btn btn-primary" })
-        @Html.RawActionLink("<i class='icon-pencil align-top bigger-125'></i>修改", "GuoXueCreate", "GuoXue", null, new { @class = "btn btn-purple" })
-        @Html.RawActionLink("<i class='icon-remove align-top bigger-125'></i>删除", "GuoXueCreate", "GuoXue", null, new { @class = "btn btn-danger" })
+        <a id="item-create" class="btn btn-primary" href="@Url.Action("GuoXueCreate", "GuoXue")"><i class='icon-plus align-top bigger-125'></i>添加</a>
+        <a id="item-edit" class="btn btn-purple" href="#"><i class='icon-pencil align-top bigger-125'></i>修改</a>
+        <a id="item-delete" class="btn btn-danger" href="#"><i class='icon-remove align-top bigger-125'></i>删除</a>
+        <div id="dialog-confirm" class="hide">
+            <div class="alert alert-info bigger-110">
+                国学将被永久删除，无法恢复
+            </div>
+
+            <div class="space-6"></div>
+
+            <p class="bigger-110 bolder center grey">
+                <i class="icon-hand-right blue bigger-120"></i>
+                确定删除吗？
+            </p>
+        </div><!-- #dialog-confirm -->
+        <div id="dialog-delete" class="hide">
+            <p>请选择一项或多项进行删除</p>
+        </div><!-- #dialog-delete -->
+        <div id="dialog-edit" class="hide">
+            <p>请选择一项进行编辑</p>
+        </div><!-- #dialog-edit -->
     </div>
 
     <table id="grid-table"></table>
@@ -20,7 +38,149 @@
 </form>
 
 @section Scripts {
+    <!--删除-->
     <script type="text/javascript">
+            $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+                _title: function (title) {
+                    var $title = this.options.title || '&nbsp;'
+                    if (("title_html" in this.options) && this.options.title_html == true)
+                        title.html($title);
+                    else title.text($title);
+                }
+            }));
+
+            $("#item-delete").on('click', function (e) {
+                var grid_selector = "#grid-table";
+                var pager_selector = "#grid-pager";
+                var selectedRowIds = $(grid_selector).jqGrid("getGridParam", "selarrrow");
+                var len = selectedRowIds.length;
+                if (len == 0) {
+                    $("#dialog-delete").removeClass('hide').dialog({
+                        modal: true,
+                        title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> 系统提示</h4></div>",
+                        title_html: true,
+                        buttons: [
+                            //{
+                            //    text: "Cancel",
+                            //    "class": "btn btn-xs",
+                            //    click: function () {
+                            //        $(this).dialog("close");
+                            //    }
+                            //},
+                            {
+                                text: "OK",
+                                "class": "btn btn-primary btn-xs",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        ]
+                    });
+                    return;
+                }
+
+                e.preventDefault();
+                $("#dialog-confirm").removeClass('hide').dialog({
+                    resizable: false,
+                    modal: true,
+                    title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 系统提示</h4></div>",
+                    title_html: true,
+                    buttons: [
+                        {
+                            html: "<i class='icon-trash bigger-110'></i>&nbsp; 确定",
+                            "class": "btn btn-danger btn-xs",
+                            click: function () {
+                                var items = [];
+                                for (var i = 0; i < len; i++) {
+                                    var rowData = $(grid_selector).jqGrid('getRowData', selectedRowIds[i]);
+                                    items.push(rowData.GxID);
+                                }
+
+                                $.post('@Url.Action("GuoXueDelete", "GuoXue")', { id: items.join(',') }, function (data) {
+                                    if (data) {
+                                        for (var i = 0; i < len; i++) {
+                                            $(grid_selector).jqGrid("delRowData", selectedRowIds[0]);
+                                        }
+                                    }
+                                });
+                                $(this).dialog("close");
+                            }
+                        }
+                        ,
+                        {
+                            html: "<i class='icon-remove bigger-110'></i>&nbsp; 取消",
+                            "class": "btn btn-xs",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+            });
+    </script>
+    <!--编辑-->
+    <script type="text/javascript">
+        $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+            _title: function (title) {
+                var $title = this.options.title || '&nbsp;'
+                if (("title_html" in this.options) && this.options.title_html == true)
+                    title.html($title);
+                else title.text($title);
+            }
+        }));
+
+        $("#item-edit").on('click', function (e) {
+            var grid_selector = "#grid-table";
+            var pager_selector = "#grid-pager";
+            var selectedRowIds = $(grid_selector).jqGrid("getGridParam", "selarrrow");
+            var len = selectedRowIds.length;
+            if (len > 1 || len == 0) {
+                $("#dialog-edit").removeClass('hide').dialog({
+                    modal: true,
+                    title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> 系统提示</h4></div>",
+                    title_html: true,
+                    buttons: [
+                        //{
+                        //    text: "Cancel",
+                        //    "class": "btn btn-xs",
+                        //    click: function () {
+                        //        $(this).dialog("close");
+                        //    }
+                        //},
+                        {
+                            text: "OK",
+                            "class": "btn btn-primary btn-xs",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+                return;
+            }
+
+            var rowData = $(grid_selector).jqGrid('getRowData', selectedRowIds[0]);
+            window.location.href = "/GuoXue/GuoXueEdit/" + rowData.GxID;
+        });
+    </script>
+
+    <script type="text/javascript">
+        var dicList = '';
+        $.ajax({
+            type: "post",
+            url: "@Url.Action("GetDicList", "Dic")",
+            dataType: "json",
+        async: false,
+        success: function (data) {
+            //赋值给全局变量;
+            var items = [];
+            $.each(data, function (key, val) {
+                items.push(val.DicID + ':' + val.DicName + ';');
+            });
+            dicList = items.join('');
+        }
+        });
+
         jQuery(function ($) {
             var grid_selector = "#grid-table";
             var pager_selector = "#grid-pager";
@@ -29,7 +189,7 @@
                 caption: "国学列表",
                 url: '@Url.Action("GetData", "GuoXue")',
                 datatype: "json",
-                colNames: ['编号', '关键词', '标题', '短标题', '分类1', '分类2', '分类3', '创建时间', '更新时间', '发布日期', '浏览统计', '点赞统计', '状态'],
+                colNames: ['编号', '关键词', '短标题', '分类', '创建时间', '更新时间', '发布日期', '浏览统计', '点赞统计', '状态'],
                 colModel: [
                     //{
                     //    name: 'myac', index: '操作', width: 80, fixed: true, sortable: false, resize: false,
@@ -42,11 +202,8 @@
                     //},
                     { name: 'GxID', index: 'GxID', hidden: true, width: 90, editable: false, edittype: "text" },
                     { name: 'Keywords', index: 'Keywords', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'GxTitle', index: 'GxTitle', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'GxTitleShort', index: 'GxTitleShort', width: 90, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'Category01', index: 'Category01', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'Category02', index: 'Category02', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                    { name: 'Category03', index: 'Category03', width: 90, editable: false, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'GxTitleShort', index: 'GxTitleShort', width: 300, editable: true, edittype: "text", searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                    { name: 'DicID', index: 'DicID', width: 90, editable: false, edittype: "select", formatter: 'select', editoptions: { value: dicList }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'CreateDate', index: 'CreateDate', width: 90, editable: false, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'UpdateDate', index: 'UpdateDate', width: 90, editable: false, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
                     { name: 'PublishDate', index: 'PublishDate', width: 90, editable: false, formatter: 'date', formatoptions: { newformat: 'Y/m/d' }, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },

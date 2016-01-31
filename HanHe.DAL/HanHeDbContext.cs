@@ -22,6 +22,45 @@ namespace HanHe.DAL
             Database.CreateIfNotExists();
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            #region 国学和字典
+            modelBuilder.Entity<Zs_Dic>()
+                .HasMany(t => t.GuoXue)
+                .WithRequired(t => t.Dic)
+                .HasForeignKey(d => d.DicID);
+
+            modelBuilder.Entity<Zs_GuoXue>()
+                .HasRequired(t => t.Dic)
+                .WithMany(t => t.GuoXue)
+                .HasForeignKey(d => d.DicID);
+            #endregion
+
+            #region 国学和附件
+            modelBuilder.Entity<Zs_GuoXue>()
+                .HasMany(t => t.GuoXueAtt)
+                .WithRequired(t => t.GuoXue)
+                .HasForeignKey(d => d.GXID);
+
+            modelBuilder.Entity<Zs_GuoXueAtt>()
+                .HasRequired(t => t.GuoXue)
+                .WithMany(t => t.GuoXueAtt)
+                .HasForeignKey(d => d.GXID);
+            #endregion
+
+            #region 朋友圈和附件
+            modelBuilder.Entity<Zs_FCircle>()
+                .HasMany(t => t.FCAtt)
+                .WithRequired(t => t.FCircle)
+                .HasForeignKey(d => d.FCID);
+
+            modelBuilder.Entity<Zs_FCAtt>()
+                .HasRequired(t => t.FCircle)
+                .WithMany(t => t.FCAtt)
+                .HasForeignKey(d => d.FCID);
+            #endregion
+        }
+
         public DbSet<Zs_ChuanJia> Zs_ChuanJia { get; set; }
         public DbSet<Zs_ChuanJiaAtt> Zs_ChuanJiaAtt { get; set; }
         public DbSet<Zs_ChuanJiaComment> Zs_ChuanJiaComment { get; set; }
