@@ -867,7 +867,6 @@
             <summary>
             完善会员资料
             </summary>
-            <param name="model">会员信息</param>
             <returns>会员信息</returns>
         </member>
         <member name="M:HanHe.Web.Controllers.MemberController.GetVerificationCode(System.String)">
@@ -1296,6 +1295,11 @@
             完善资料
             </summary>
         </member>
+        <member name="P:HanHe.Web.Models.UpdateMemberModel.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
         <member name="P:HanHe.Web.Models.UpdateMemberModel.MName">
             <summary>
             真实姓名，2-50位中英文字符，不含特殊字符
@@ -1600,6 +1604,11 @@
             <summary>
             事历标题
             </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.AddProjectModel.ProTitleShort">
+            <summary>
+            事历短标题
+            </summary>
         </member>
         <member name="P:HanHe.Web.Models.AddProjectModel.ProInfo">
             <summary>

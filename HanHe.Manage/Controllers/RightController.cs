@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -57,7 +58,7 @@ namespace HanHe.Manage.Controllers
                  where (item.RightID == joinProduct.ParentID)
                  where (item.RightID == id)
                  select item).Count();
-            
+
             return childCount == 0;
         }
         /// <summary>
@@ -232,7 +233,7 @@ namespace HanHe.Manage.Controllers
             var item = bRight.Find(id);
             var model = new RightEdit();
             model = sysFun.InitialEntity<Zs_Right, RightEdit>(item, model);
-            
+
             return View(model);
         }
         /// <summary>
@@ -249,7 +250,7 @@ namespace HanHe.Manage.Controllers
             Zs_Right item = bRight.Find(model.RightID);
             item = sysFun.InitialEntity<RightEdit, Zs_Right>(model, item);
             var result = bRight.Update(item);
-            
+
             if (result) return RedirectToAction("RightList");
             else return View(model);
         }
@@ -273,6 +274,33 @@ namespace HanHe.Manage.Controllers
         public ActionResult Test()
         {
             return View();
+        }
+        public JsonResult TreeDataAPI(string parent)
+        {
+            int parentId = 0;
+            List<Zs_Right> list = new List<Zs_Right>();
+            List<Dictionary<string, object>> listDict = new List<Dictionary<string, object>>();
+
+            if (parent == "#") parentId = 0; else parentId = int.Parse(parent);
+
+            list = bRight.Entities.Where(f => f.ParentID == parentId).ToList();
+            foreach (var item in list)
+            {
+                if (item.ParentID == parentId)
+                {
+                    Dictionary<string, object> dict = new Dictionary<string, object>();
+                    dict.Add("id", item.RightID);
+                    dict.Add("icon", "");
+                    dict.Add("text", item.RightName);
+
+                    if (list.Where(d => d.ParentID == parentId).Count() > 0)
+                        dict.Add("children", true);
+                    else
+                        dict.Add("children", false);
+                    listDict.Add(dict);
+                }
+            }
+            return Json(listDict, JsonRequestBehavior.AllowGet);
         }
     }
 }

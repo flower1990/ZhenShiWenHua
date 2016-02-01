@@ -43,6 +43,7 @@ namespace HanHe.DAL
         public static IZs_ProjectComment DZs_ProjectComment { get { return new DZs_ProjectComment(); } }
         public static IZs_Right DZs_Right { get { return new DZs_Right(); } }
         public static IZs_Role DZs_Role { get { return new DZs_Role(); } }
+        public static IZs_RoleRight DZs_RoleRight { get { return new DZs_RoleRight(); } }
         public static IZs_RoleUser DZs_RoleUser { get { return new DZs_RoleUser(); } }
         public static IZs_SetNotice DZs_SetNotice { get { return new DZs_SetNotice(); } }
         public static IZs_SetPrivacy DZs_SetPrivacy { get { return new DZs_SetPrivacy(); } }
