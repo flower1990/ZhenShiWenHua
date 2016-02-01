@@ -8,28 +8,13 @@ using HanHe.Model;
 using HanHe.Util;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace HanHe.Manage.Controllers
 {
-    public class TreeNode
-    {
-        public int RightID { get; set; }
-        public string RightName { get; set; }
-        public string ControllerName { get; set; }
-        public string ActionName { get; set; }
-        public int ParentID { get; set; }
-        public int SortID { get; set; }
-        public int RightProperty { get; set; }
-        public string Remark { get; set; }
-        public int level { get; set; }
-        public bool isLeaf { get; set; }
-        public bool expanded { get; set; }
-        public int? parent { get; set; }
-    }
-
     public class RightController : Controller
     {
         SysFun sysFun = new SysFun();
@@ -37,63 +22,44 @@ namespace HanHe.Manage.Controllers
         IZs_Role bRole = new BZs_Role();
         IZs_Right bRight = new BZs_Right();
 
-        #region 注释
-        //public JsonResult GetSPTreeJSON(string nodeid, string n_level, string currentUser)
-        //{
-        //    List<TreeNode> list = GetTreeNodeList(nodeid, n_level);
+        private int GetRowLevel(int parentID, List<Zs_Right> cachedGridRows)
+        {
+            int level = 0;
+            while (parentID != 0)
+            {
+                level++;
+                var result = from item in cachedGridRows
+                             where item.RightID == parentID
+                             select item;
 
-        //    var jsonData = new
-        //    {
-        //        page = 1,
-        //        total = 1,
-        //        records = 1,
-        //        rows = (
-        //            from TreeNode u in list
-        //            select new
-        //            {
-        //                cell = new object[] { u.Id.ToString(), u.name, u.level, u.ParentId, u.isLeaf, false }
-        //            }).ToList()
-        //    };
+                parentID = result.Single().ParentID;
+            }
 
-        //    return Json(jsonData, JsonRequestBehavior.AllowGet);
-        //}
+            return level;
+        }
+        private bool IsLeafRow(int id, List<Zs_Right> cachedGridRows)
+        {
+            foreach (var retailData in cachedGridRows)
+            {
+                if (retailData.ParentID == id)
+                {
+                    return false;
+                }
+            }
 
-        //public List<TreeNode> GetTreeNodeList(string nodeid, string n_level)
-        //{
-        //    List<Tree> root = null;
-
-        //    Guid? currentNode;
-        //    if (nodeid == null)
-        //        currentNode = null;
-        //    else
-        //        currentNode = new Guid(nodeid);
-
-        //    //if (nodeid == null)
-        //    //    root = ssdsContext.Trees.Where(x => x.ParentId == null).ToList();
-        //    //else
-        //    //    root = ssdsContext.Trees.Where(x => x.ParentId == currentNode).ToList();
-
-        //    List<TreeNode> list = new List<TreeNode>();
-
-        //    int newLevel = n_level == null ? 0 : Convert.ToInt32(n_level) + 1;
-
-        //    foreach (Tree t in root)
-        //    {
-        //        TreeNode n = new TreeNode
-        //        {
-        //            expanded = false,
-        //            Id = t.UserId,
-        //            isLeaf = t.IsUser,
-        //            name = t.Name,
-        //            ParentId = t.ParentId,
-        //            level = newLevel
-        //        };
-        //        list.Add(n);
-        //    }
-        //    return list;
-        //}
-        #endregion
-
+            return true;
+        }
+        private bool IsLeafRow(int id)
+        {
+            int childCount =
+                (from item in bRight.Entities
+                 from joinProduct in bRight.Entities
+                 where (item.RightID == joinProduct.ParentID)
+                 where (item.RightID == id)
+                 select item).Count();
+            
+            return childCount == 0;
+        }
         /// <summary>
         /// 权限列表
         /// </summary>
@@ -103,44 +69,37 @@ namespace HanHe.Manage.Controllers
             return View();
         }
         /// <summary>
-        /// 用户列表
+        /// 权限列表
         /// </summary>
         /// <param name="grid"></param>
         /// <returns></returns>
-        public JsonResult GetData(GridSettings grid, string nodeid, string n_level)
+        public JsonResult GetData(GridSettings grid)
         {
-            //var query = bRight.Entities;
-            //var rightID = nodeid != null ? int.Parse(nodeid) : 0;
-            //int level = n_level != null ? int.Parse(n_level) + 1 : 0;
-            //var subRight = query.Where(f => f.ParentID == rightID).ToList();
-            int currentNode;
-            int? parent;
-            List<TreeNode> list = new List<TreeNode>();
-            int newLevel = n_level == null ? 0 : Convert.ToInt32(n_level) + 1;
-            if (nodeid == null) parent = null; else parent = int.Parse(nodeid);
-            if (nodeid == null) currentNode = 0; else currentNode = int.Parse(nodeid);
-            var query = bRight.Entities.Where(f => f.ParentID == currentNode);
+            List<Zs_Right> list = new List<Zs_Right>();
+            var cachedGridRows = bRight.Entities.OrderBy(f => f.lft).ToList();
 
-            foreach (Zs_Right t in query)
-            {
-                TreeNode n = new TreeNode
-                {
-                    RightID = t.RightID,
-                    RightName = t.RightName,
-                    ControllerName = t.ControllerName,
-                    ActionName = t.ActionName,
-                    ParentID = t.ParentID,
-                    SortID = t.SortID,
-                    RightProperty = t.RightProperty,
-                    Remark = t.Remark,
+            var hierarchyRows = from item in cachedGridRows
+                                select new
+                                {
+                                    RightID = item.RightID,
+                                    RightCode = item.RightCode,
+                                    RightName = item.RightName,
+                                    ControllerName = item.ControllerName,
+                                    ActionName = item.ActionName,
+                                    ParentID = item.ParentID,
+                                    SortID = item.SortID,
+                                    RightProperty = item.RightProperty,
+                                    Remark = item.Remark,
+                                    CreateDate = item.CreateDate,
 
-                    isLeaf = bRight.Exist(f => f.ParentID == t.RightID),
-                    level = newLevel,
-                    parent = parent,
-                    expanded = false,
-                };
-                list.Add(n);
-            }
+                                    lft = item.lft,
+                                    rgt = item.rgt,
+                                    level = GetRowLevel(item.ParentID, cachedGridRows),
+                                    isLeaf = IsLeafRow(item.RightID, cachedGridRows),
+                                    parent = item.ParentID,
+                                    expanded = true,
+                                    loaded = true,
+                                };
 
             //converting in grid format
             var result = new
@@ -148,61 +107,133 @@ namespace HanHe.Manage.Controllers
                 total = 1,
                 page = 1,
                 records = 1,
-                rows = (from item in list
+                rows = (from item in hierarchyRows
                         select new
                         {
                             cell = new object[]
                             { 
-                                item.RightID.ToString(), 
-                                //item.RightCode,
+                                item.RightID, 
+                                item.RightCode,
                                 item.RightName, 
                                 item.ControllerName, 
                                 item.ActionName, 
                                 item.ParentID,
                                 item.SortID, 
-                                item.RightProperty, 
+                                item.RightProperty,
                                 item.Remark,
+                                item.CreateDate,
 
                                 item.level,
                                 item.isLeaf,
                                 item.parent,
-                                "false"
+                                item.expanded,
+                                item.loaded,
+                                item.lft,
+                                item.rgt,
                             }
                         }).ToArray()
             };
 
             //convert to JSON and return to client
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(hierarchyRows, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
-        /// 添加
+        /// 添加子节点
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RightCreateChildNode()
+        {
+            var model = new RightCreateChildNode();
+            model.SortID = 0;
+
+            @ViewBag.RightProperty = DicUtil.Instance.RightProperties(0);
+
+            return View(model);
+        }
+        /// <summary>
+        /// 添加子节点
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public string Create(RightCreate model)
+        [ValidateAntiForgeryToken]
+        public ActionResult RightCreateChildNode(RightCreateChildNode model)
         {
-            string msg;
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    Zs_Right item = new Zs_Right();
-                    item = sysFun.InitialEntity<RightCreate, Zs_Right>(model, item);
+            if (!ModelState.IsValid) { return View(model); }
 
-                    bRight.Add(item);
-                    msg = "Saved Successfully";
-                }
-                else
-                {
-                    msg = "Validation data not successfull";
-                }
-            }
-            catch (Exception ex)
+            string sql = "exec SP_RightCreate @RightID,@RightCode,@RightName,@ControllerName,@ActionName,@ParentID,@SortID,@RightProperty,@Remark,@isLeaf";
+            SqlParameter[] param = new SqlParameter[]
             {
-                msg = "Error occured:" + ex.Message;
-            }
-            return msg;
+                new SqlParameter("@RightID", model.ParentID),
+                new SqlParameter("@RightCode", model.RightCode),
+                new SqlParameter("@RightName", model.RightName),
+                new SqlParameter("@ControllerName", model.ControllerName),
+                new SqlParameter("@ActionName", model.ActionName),
+                new SqlParameter("@ParentID", model.ParentID),
+                new SqlParameter("@SortID", model.SortID),
+                new SqlParameter("@RightProperty", model.RightProperty),
+                new SqlParameter("@Remark", model.Remark),
+                new SqlParameter("@isLeaf", true),
+            };
+
+            var result = bRight.Add(sql, param);
+            if (result.RightID > 0) return RedirectToAction("RightList");
+            else return View(model);
+        }
+        /// <summary>
+        /// 添加跟节点
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RightCreateRootNode()
+        {
+            var model = new RightCreateRootNode();
+            model.SortID = 0;
+
+            @ViewBag.RightProperty = DicUtil.Instance.RightProperties(0);
+
+            return View(model);
+        }
+        /// <summary>
+        /// 添加跟节点
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RightCreateRootNode(RightCreateRootNode model)
+        {
+            if (!ModelState.IsValid) { return View(model); }
+
+            string sql = "exec SP_RightCreate @RightID,@RightCode,@RightName,@ControllerName,@ActionName,@ParentID,@SortID,@RightProperty,@Remark,@isLeaf";
+            SqlParameter[] param = new SqlParameter[]
+            {
+                new SqlParameter("@RightID", model.ParentID),
+                new SqlParameter("@RightCode", model.RightCode),
+                new SqlParameter("@RightName", model.RightName),
+                new SqlParameter("@ControllerName", model.ControllerName),
+                new SqlParameter("@ActionName", model.ActionName),
+                new SqlParameter("@ParentID", model.ParentID),
+                new SqlParameter("@SortID", model.SortID),
+                new SqlParameter("@RightProperty", model.RightProperty),
+                new SqlParameter("@Remark", model.Remark),
+                new SqlParameter("@isLeaf", false),
+            };
+
+            var result = bRight.Add(sql, param);
+            if (result.RightID > 0) return RedirectToAction("RightList");
+            else return View(model);
+        }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RightEdit(int id = 0)
+        {
+            var item = bRight.Find(id);
+            var model = new RightEdit();
+            model = sysFun.InitialEntity<Zs_Right, RightEdit>(item, model);
+            
+            return View(model);
         }
         /// <summary>
         /// 编辑
@@ -210,40 +241,38 @@ namespace HanHe.Manage.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public string Edit(RightEdit model)
+        [ValidateAntiForgeryToken]
+        public ActionResult RightEdit(RightEdit model)
         {
-            string msg;
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    Zs_Right item = bRight.Find(model.RightID);
+            if (!ModelState.IsValid) { return View(model); }
 
-                    item = sysFun.InitialEntity<RightEdit, Zs_Right>(model, item);
-                    bRight.Update(item);
-                    msg = "Saved Successfully";
-                }
-                else
-                {
-                    msg = "Validation data not successfull";
-                }
-            }
-            catch (Exception ex)
-            {
-                msg = "Error occured:" + ex.Message;
-            }
-            return msg;
+            Zs_Right item = bRight.Find(model.RightID);
+            item = sysFun.InitialEntity<RightEdit, Zs_Right>(model, item);
+            var result = bRight.Update(item);
+            
+            if (result) return RedirectToAction("RightList");
+            else return View(model);
         }
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string Delete(int id)
+        public JsonResult RightDelete(int id)
         {
-            Zs_Right item = bRight.Find(id);
-            bRight.Delete(item);
-            return "Deleted successfully";
+            string sql = "exec SP_RightDelete @RightID";
+            SqlParameter[] param = new SqlParameter[]
+            {
+                new SqlParameter("@RightID", id),
+            };
+
+            var result = bRight.Delete(sql, param);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Test()
+        {
+            return View();
         }
     }
 }

@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="~/Content/css/colorpicker.css" />
 
     <!-- fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" />
+    <link href="http://fonts.useso.com/css?family=Open+Sans:400,300" rel="stylesheet" />
 
     <!-- ace styles -->
 
@@ -223,7 +223,7 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                    <img src="@Url.Content("~/Content/avatars/avatar.png")" class="msg-photo" alt="Alex's Avatar" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span class="blue">Alex:</span>
@@ -240,7 +240,7 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                    <img src="@Url.Content("~/Content/avatars/avatar3.png")" class="msg-photo" alt="Susan's Avatar" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span class="blue">Susan:</span>
@@ -257,7 +257,7 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                    <img src="@Url.Content("~/Content/avatars/avatar4.png")" class="msg-photo" alt="Bob's Avatar" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span class="blue">Bob:</span>
@@ -413,7 +413,7 @@
                         </h1>
                     </div>
                     <div class="row">
-                        <div id="content" class="col-xs-12">
+                        <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
                             @RenderBody()
                             <!-- PAGE CONTENT ENDS -->
@@ -509,6 +509,8 @@
     <script src="~/Content/js/jquery.ui.touch-punch.min.js"></script>
     <script src="~/Content/js/chosen.jquery.min.js"></script>
     <script src="~/Content/js/fuelux/fuelux.spinner.min.js"></script>
+    <script src="~/Content/js/fuelux/data/fuelux.tree-sampledata.js"></script>
+    <script src="~/Content/js/fuelux/fuelux.tree.min.js"></script>
     <script src="~/Content/js/date-time/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/js/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="~/Content/js/date-time/bootstrap-timepicker.min.js"></script>
@@ -526,6 +528,7 @@
     <script src="~/Content/ueditor/ueditor.config.js"></script>
     <script src="~/Content/ueditor/ueditor.all.min.js"></script>
     <script src="~/Content/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Scripts/jquery.easyui-1.4.3.min.js"></script>
 
     <!-- ace scripts -->
     <script src="~/Content/js/ace-elements.min.js"></script>

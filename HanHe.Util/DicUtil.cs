@@ -166,6 +166,35 @@ namespace HanHe.Util
             SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
             return selectList;
         }
-        
+        /// <summary>
+        /// 获取属性列表
+        /// </summary>
+        /// <returns></returns>
+        public SelectList DicProperties(int selectedValue)
+        {
+            List<SelectListItem> listItem = new List<SelectListItem>() 
+            {
+                new SelectListItem(){ Value = "0", Text = "数据属性"},
+                new SelectListItem(){ Value = "1", Text = "栏目属性"},                
+            };
+            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
+            return selectList;
+        }
+        /// <summary>
+        /// 获取权限属性列表
+        /// </summary>
+        /// <returns></returns>
+        public SelectList RightProperties(int selectedValue)
+        {
+            List<SelectListItem> listItem = new List<SelectListItem>() 
+            {
+                new SelectListItem(){ Value = "0", Text = "模块权限"},
+                new SelectListItem(){ Value = "1", Text = "页权限"},                
+                new SelectListItem(){ Value = "2", Text = "按钮权限"},     
+                new SelectListItem(){ Value = "3", Text = "数据权限"},     
+            };
+            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
+            return selectList;
+        }
     }
 }

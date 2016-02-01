@@ -6,6 +6,7 @@ using HanHe.Manage.Models.Helpers;
 using HanHe.Manage.Models.Repositories;
 using HanHe.Manage.Models.Right;
 using HanHe.Model;
+using HanHe.Util;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -20,20 +21,6 @@ namespace HanHe.Manage.Controllers
         SysFun sysFun = new SysFun();
         IZs_Dic bDic = new BZs_Dic();
 
-        /// <summary>
-        /// 获取科目列表
-        /// </summary>
-        /// <returns></returns>
-        public SelectList GetPropertyList(int selectedValue)
-        {
-            List<SelectListItem> listItem = new List<SelectListItem>() 
-            {
-                new SelectListItem(){ Value = "0", Text = "数据属性"},
-                new SelectListItem(){ Value = "1", Text = "栏目属性"},                
-            };
-            SelectList selectList = new SelectList(listItem, "Value", "Text", selectedValue);
-            return selectList;
-        }
         private int GetRowLevel(int parentID, List<Zs_Dic> cachedGridRows)
         {
             int level = 0;
@@ -170,7 +157,7 @@ namespace HanHe.Manage.Controllers
             var model = new DicCreateChildNode();
             model.SortID = 0;
 
-            @ViewBag.DicProperty = GetPropertyList(0);
+            @ViewBag.DicProperty = DicUtil.Instance.DicProperties(0);
 
             return View();
         }
@@ -210,7 +197,7 @@ namespace HanHe.Manage.Controllers
         /// <returns></returns>
         public ActionResult DicCreateRootNode()
         {
-            @ViewBag.DicProperty = GetPropertyList(0);
+            @ViewBag.DicProperty = DicUtil.Instance.DicProperties(0);
             return View();
         }
         /// <summary>

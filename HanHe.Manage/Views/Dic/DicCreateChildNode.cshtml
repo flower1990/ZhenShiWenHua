@@ -126,14 +126,10 @@
             jQuery(grid_selector).jqGrid({
                 url: '@Url.Action("GetData", "Dic")',
                 mtype: 'GET',
-                colNames: ['编号', '字典名称', 'lft', 'rgt', 'level', 'uiicon'],
+                colNames: ['编号', '字典名称'],
                 colModel: [
                     { name: 'DicID', index: 'DicID', hidden: true, key: true, width: 90, label: "DicID" },
                     { name: 'DicName', index: 'DicName', width: 150, label: "DicName", sorttype: "string" },
-                    { name: 'lft', hidden: true },
-                    { name: 'rgt', hidden: true },
-                    { name: 'level', hidden: true },
-                    { name: 'uiicon', hidden: true },
                 ],
                 datatype: "json",
                 hoverrows: false,
