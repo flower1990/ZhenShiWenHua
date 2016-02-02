@@ -8,9 +8,11 @@ namespace HanHe.Manage.Controllers
 {
     public class RoleRightController : Controller
     {
-        //
-        // GET: /RoleRight/
-        public ActionResult Index()
+        /// <summary>
+        /// 角色权限分配
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RoleRightCreate()
         {
             return View();
         }

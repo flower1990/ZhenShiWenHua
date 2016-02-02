@@ -863,7 +863,7 @@
             <param name="model">注册信息</param>
             <returns>会员信息</returns>
         </member>
-        <member name="M:HanHe.Web.Controllers.MemberController.UpdateMember(HanHe.Web.Models.UpdateMemberModel)">
+        <member name="M:HanHe.Web.Controllers.MemberController.UpdateMember">
             <summary>
             完善会员资料
             </summary>
@@ -1679,6 +1679,11 @@
             <summary>
             事历标题
             </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.UpdateProjectModel.ProTitleShort">
+            <summary>
+            事历短标题
+            </summary>
         </member>
         <member name="P:HanHe.Web.Models.UpdateProjectModel.ProInfo">
             <summary>

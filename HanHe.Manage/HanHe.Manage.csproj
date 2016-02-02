@@ -1021,12 +1021,12 @@
     <Content Include="Views\Right\RightCreateRootNode.cshtml" />
     <Content Include="Views\Right\Test.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\RoleRight\RoleRightCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="upload\" />
     <Folder Include="Views\MemorialDay\" />
-    <Folder Include="Views\RoleRight\" />
     <Folder Include="Views\RoleUser\" />
   </ItemGroup>
   <ItemGroup>

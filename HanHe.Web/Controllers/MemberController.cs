@@ -52,29 +52,34 @@ namespace HanHe.Web.Controllers
             var message = string.Empty;
             var member = new Zs_Member();
             var identity = new ClaimsIdentity();
+            var dicError = new { result = "", message = "" };
+            var dicSucess = new { result = "", message = new Zs_Member() };
 
             member = bMember.MemberLogin(model.Account);
             if (member == null)
             {
                 message = string.Format("账号 {0} 不存在", model.Account);
-                return Ok(message);
+                dicError = new { result = "0", message = message };
+                return Ok(dicError);
             }
             else if (!member.DelStatus)
             {
                 message = string.Format("账号 {0} 已删除", model.Account);
-                return Ok(message);
+                dicError = new { result = "0", message = message };
+                return Ok(dicError);
             }
             else if (member.Pwd != StringUtil.EncodeString(model.Password, StringUtil.GetPwdKey(member.MChar.ToString())))
             {
                 message = string.Format("密码输入错误");
-                return Ok(message);
+                dicError = new { result = "0", message = message };
+                return Ok(dicError);
             }
 
             //identity = bMember.CreateIdentity(member, DefaultAuthenticationTypes.ApplicationCookie);
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             //AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
-
-            return Ok(member);
+            dicSucess = new { result = "1", message = member };
+            return Ok(dicSucess);
         }
         /// <summary>
         /// QQ登录
@@ -189,13 +194,14 @@ namespace HanHe.Web.Controllers
             var message = string.Empty;
             var member = new Zs_Member();
             var identity = new ClaimsIdentity();
-            var dicMessage = new Dictionary<string, string>();
+            var dicError = new { result = "", message = "" };
+            var dicSucess = new { result = "", message = new Zs_Member() };
 
             if (bMember.Exist(f => f.Mobile == model.Mobile))
             {
                 message = string.Format("手机号 {0} 已注册", model.Mobile);
-                dicMessage.Add(model.Mobile, message);
-                return Ok(dicMessage);
+                dicError = new { result = "0", message = message };
+                return Ok(dicError);
             }
 
             member.MChar = StringUtil.GetGUID();
@@ -210,11 +216,13 @@ namespace HanHe.Web.Controllers
                 //identity = bMember.CreateIdentity(member, DefaultAuthenticationTypes.ApplicationCookie);
                 //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 //AuthenticationManager.SignIn(identity);
-                return Ok(member);
+                dicSucess = new { result = "1", message = member };
+                return Ok(dicSucess);
             }
             else
             {
-                return Ok("注册失败");
+                dicError = new { result = "0", message = "注册失败" };
+                return Ok(dicError);
             }
 
         }
@@ -263,7 +271,7 @@ namespace HanHe.Web.Controllers
         /// </summary>
         /// <returns>会员信息</returns>
         [HttpPost, Route("UpdateMember")]
-        public async Task<IHttpActionResult> UpdateMember(UpdateMemberModel model)
+        public async Task<IHttpActionResult> UpdateMember()
         {
             long id = 0;
             var updateResult = false;
@@ -271,6 +279,8 @@ namespace HanHe.Web.Controllers
             var hashTable = new Hashtable();
             var formData = new Dictionary<string, string>();
             var fileData = new List<FileDataInfo>();
+            var dicError = new { result = "", message = "" };
+            var dicSucess = new { result = "", message = new Zs_Member() };
 
             //获取表单数据
             hashTable = await sysFun.GetFormData(Request);
@@ -288,9 +298,14 @@ namespace HanHe.Web.Controllers
             }
             updateResult = bMember.Update(member);
             //更新会员信息
-            if (!updateResult) return Ok("更新失败");
+            if (!updateResult)
+            {
+                dicError = new { result = "0", message = "更新失败" };
+                return Ok(dicError);
+            }
 
-            return Ok(member);
+            dicSucess = new { result = "1", message = member };
+            return Ok(dicSucess);
         }
         /// <summary>
         /// 获取验证码
@@ -393,7 +408,5 @@ namespace HanHe.Web.Controllers
 
             return Ok(member);
         }
-
-
     }
 }
