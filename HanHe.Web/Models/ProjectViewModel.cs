@@ -38,6 +38,11 @@ namespace HanHe.Web.Models
         [Required(ErrorMessage = "必填")]
         public string ProTitle { get; set; }
         /// <summary>
+        /// 事历短标题
+        /// </summary>
+        [Required(ErrorMessage = "必填")]
+        public string ProTitleShort { get; set; }
+        /// <summary>
         /// 项目文本内容
         /// </summary>		
         public string ProInfo { get; set; }
@@ -103,6 +108,11 @@ namespace HanHe.Web.Models
         /// 事历标题
         /// </summary>		
         public string ProTitle { get; set; }
+        /// <summary>
+        /// 事历短标题
+        /// </summary>
+        [Required(ErrorMessage = "必填")]
+        public string ProTitleShort { get; set; }
         /// <summary>
         /// 项目文本内容
         /// </summary>		

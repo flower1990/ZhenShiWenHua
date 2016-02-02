@@ -261,10 +261,9 @@ namespace HanHe.Web.Controllers
         /// <summary>
         /// 完善会员资料
         /// </summary>
-        /// <param name="model">会员信息</param>
         /// <returns>会员信息</returns>
         [HttpPost, Route("UpdateMember")]
-        public async Task<IHttpActionResult> UpdateMember([FromBody]UpdateMemberModel model)
+        public async Task<IHttpActionResult> UpdateMember(UpdateMemberModel model)
         {
             long id = 0;
             var updateResult = false;

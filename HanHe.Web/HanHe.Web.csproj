@@ -209,7 +209,9 @@
     <Compile Include="Controllers\FCircleController.cs" />
     <Compile Include="Controllers\GanWuAttController.cs" />
     <Compile Include="Controllers\GanWuController.cs" />
-    <Compile Include="Controllers\GuoXueController.cs" />
+    <Compile Include="Controllers\GuoXueController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MemberController.cs" />

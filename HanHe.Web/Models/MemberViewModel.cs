@@ -13,6 +13,10 @@ namespace HanHe.Web.Models
     public class UpdateMemberModel
     {
         /// <summary>
+        /// 会员编号
+        /// </summary>
+        public long MID { get; set; }
+        /// <summary>
         /// 真实姓名，2-50位中英文字符，不含特殊字符
         /// </summary>
         [StringLength(50, MinimumLength = 2, ErrorMessage = "{2}-{1}位字符")]

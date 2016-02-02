@@ -80,6 +80,7 @@
     <Compile Include="Zs_ProjectComment.cs" />
     <Compile Include="Zs_Right.cs" />
     <Compile Include="Zs_Role.cs" />
+    <Compile Include="Zs_RoleRight.cs" />
     <Compile Include="Zs_RoleUser.cs" />
     <Compile Include="Zs_SetNotice.cs" />
     <Compile Include="Zs_SetPrivacy.cs" />

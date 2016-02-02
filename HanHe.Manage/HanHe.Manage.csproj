@@ -188,6 +188,8 @@
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RightController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RoleRightController.cs" />
+    <Compile Include="Controllers\RoleUserController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -344,18 +346,6 @@
     <Content Include="Content\js\jquery.validate.min.js" />
     <Content Include="Content\js\jquery.validate.unobtrusive.js" />
     <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Content\js\jstree\jstree.js" />
-    <Content Include="Content\js\jstree\jstree.min.js" />
-    <Content Include="Content\js\jstree\themes\default-dark\32px.png" />
-    <Content Include="Content\js\jstree\themes\default-dark\40px.png" />
-    <Content Include="Content\js\jstree\themes\default-dark\style.css" />
-    <Content Include="Content\js\jstree\themes\default-dark\style.min.css" />
-    <Content Include="Content\js\jstree\themes\default-dark\throbber.gif" />
-    <Content Include="Content\js\jstree\themes\default\32px.png" />
-    <Content Include="Content\js\jstree\themes\default\40px.png" />
-    <Content Include="Content\js\jstree\themes\default\style.css" />
-    <Content Include="Content\js\jstree\themes\default\style.min.css" />
-    <Content Include="Content\js\jstree\themes\default\throbber.gif" />
     <Content Include="Content\js\markdown\bootstrap-markdown.min.js" />
     <Content Include="Content\js\markdown\markdown.min.js" />
     <Content Include="Content\js\page\form-dialogs.js" />
@@ -467,6 +457,13 @@
     <Content Include="Content\themes\bootstrap\validatebox.css" />
     <Content Include="Content\themes\bootstrap\window.css" />
     <Content Include="Content\themes\color.css" />
+    <Content Include="Content\themes\default-dark\32px.png" />
+    <Content Include="Content\themes\default-dark\40px.png" />
+    <Content Include="Content\themes\default-dark\style.css" />
+    <Content Include="Content\themes\default-dark\style.min.css" />
+    <Content Include="Content\themes\default-dark\throbber.gif" />
+    <Content Include="Content\themes\default\32px.png" />
+    <Content Include="Content\themes\default\40px.png" />
     <Content Include="Content\themes\default\accordion.css" />
     <Content Include="Content\themes\default\calendar.css" />
     <Content Include="Content\themes\default\combo.css" />
@@ -510,9 +507,12 @@
     <Content Include="Content\themes\default\slider.css" />
     <Content Include="Content\themes\default\spinner.css" />
     <Content Include="Content\themes\default\splitbutton.css" />
+    <Content Include="Content\themes\default\style.css" />
+    <Content Include="Content\themes\default\style.min.css" />
     <Content Include="Content\themes\default\switchbutton.css" />
     <Content Include="Content\themes\default\tabs.css" />
     <Content Include="Content\themes\default\textbox.css" />
+    <Content Include="Content\themes\default\throbber.gif" />
     <Content Include="Content\themes\default\tooltip.css" />
     <Content Include="Content\themes\default\tree.css" />
     <Content Include="Content\themes\default\validatebox.css" />
@@ -925,6 +925,8 @@
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="controller.ashx" />
+    <Content Include="Content\themes\default-dark\Thumbs.db" />
+    <Content Include="Content\themes\default\Thumbs.db" />
     <None Include="Properties\PublishProfiles\manage.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -945,6 +947,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jstree.js" />
+    <Content Include="Scripts\jstree.min.js" />
     <Content Include="Scripts\locale\easyui-lang-af.js" />
     <Content Include="Scripts\locale\easyui-lang-am.js" />
     <Content Include="Scripts\locale\easyui-lang-ar.js" />
@@ -1016,12 +1020,13 @@
     <Content Include="Views\Right\RightCreateRootNode.cshtml" />
     <Content Include="Views\Right\Test.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Right\tree_data1.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="upload\" />
     <Folder Include="Views\MemorialDay\" />
+    <Folder Include="Views\RoleRight\" />
+    <Folder Include="Views\RoleUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

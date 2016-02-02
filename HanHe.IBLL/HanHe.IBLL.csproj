@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseService.cs" />
+    <Compile Include="IZs_RoleRight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IZs_ChuanJia.cs" />
     <Compile Include="IZs_ChuanJiaAtt.cs" />

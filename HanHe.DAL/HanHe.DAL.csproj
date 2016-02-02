@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
     <Compile Include="ContextFactory.cs" />
+    <Compile Include="DZs_RoleRight.cs" />
     <Compile Include="HanHeDbContext.cs" />
     <Compile Include="Migrations\201601151415319_InitialCreate.cs" />
     <Compile Include="Migrations\201601151415319_InitialCreate.Designer.cs">
