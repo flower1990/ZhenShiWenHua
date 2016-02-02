@@ -223,7 +223,6 @@
     <Compile Include="Models\Project\ProjectEdit.cs" />
     <Compile Include="Models\Repositories\RolePropertyRepository.cs" />
     <Compile Include="Models\Right\RightCreateChildNode.cs" />
-    <Compile Include="Models\Right\RightCreateRootNode.cs" />
     <Compile Include="Models\Right\RightEdit.cs" />
     <Compile Include="Models\Users\UserCreate.cs" />
     <Compile Include="Models\Users\UserEdit.cs" />
