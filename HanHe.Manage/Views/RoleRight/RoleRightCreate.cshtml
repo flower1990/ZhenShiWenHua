@@ -4,5 +4,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>RoleRightCreate</h2>
+<form id="form1">
+    <div id="module-tree" class="tree-demo">
+    </div>
+</form>
 
+@section Scripts {
+    <script>
+        $("#module-tree").jstree({
+            "core": {
+                "themes": {
+                    "responsive": false
+                },
+                // so that create works
+                "check_callback": false,
+                'data': {
+                    'url': function (node) {
+                        return '/Right/TreeDataAPI';
+                    },
+                    'data': function (node) {
+                        return { 'parent': node.id };
+                    }
+                }
+            },
+            "types": {
+                "default": {
+                    "icon": "icon-folder-close"
+                },
+                "file": {
+                    "icon": "icon-folder-open"
+                }
+            },
+            "state": { "key": "demo3" },
+            "plugins": ["dnd", "state", "types", "checkbox"]
+        });
+
+        //$("#module-tree").bind("select_node.jstree", function (e, data) {
+        //    var i, j, r = [];
+        //    for (i = 0, j = data.selected.length; i < j; i++) {
+        //        r.push(data.instance.get_node(data.selected[i]).id);
+        //        var url = "/admin/module/ModuleDataTable?parent=" + r;
+        //        //加载_ModuleDataTable部分视图
+        //        $("#_ModuleDataTable").load(url);
+        //    }
+        //})
+    </script>
+}

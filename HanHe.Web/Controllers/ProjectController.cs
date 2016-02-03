@@ -31,12 +31,22 @@ namespace HanHe.Web.Controllers
         /// </summary>
         /// <param name="projectID"></param>
         /// <returns></returns>
-        public string GetAttUrl(long projectID)
+        private string GetAttUrl(long projectID)
         {
             var attList = bProjectAtt.Find(s => s.AttType == 1 && s.ProjectID == projectID);
             if (attList == null) return "";
 
             return attList.AttUrl;
+        }
+        /// <summary>
+        /// 获取附件图片
+        /// </summary>
+        /// <param name="att"></param>
+        /// <returns></returns>
+        private string GetAttUrl(ICollection<Zs_ProjectAtt> att)
+        {
+            if (att.Count == 0) return "";
+            return att.Where(f => f.AttType == 1).FirstOrDefault().AttUrl;
         }
         /// <summary>
         /// 更新附件列表
@@ -152,74 +162,54 @@ namespace HanHe.Web.Controllers
         [HttpGet, Route("GetByMID")]
         public IHttpActionResult GetProjectAll([FromUri]long mid)
         {
-            var qinghuanList = new List<GetProjectAllModel>();
-            var zhonghuanList = new List<GetProjectAllModel>();
-            var qingjiList = new List<GetProjectAllModel>();
-            var zhongjiList = new List<GetProjectAllModel>();
+            //事历列表
+            var projectList = bProject.Entities.Where(f => f.MID == mid).ToList();
 
-            var projectList = bProject.Entities.Where(f => f.MID == mid);
-            //轻缓
+            #region//轻缓
             var qinghuan = projectList
                 .Where(f => f.ImpropantWeight == 0 && f.UrgentWeight == 0)
-                .Select(f => new { ProjectID = f.ProjectID, ProTitleShort = f.ProTitleShort })
-                .ToList();
-            foreach (var item in qinghuan)
-            {
-                var project = new GetProjectAllModel 
+                .Select(f => new 
                 { 
-                    ProjectID = item.ProjectID, 
-                    ProTitleShort = item.ProTitleShort, 
-                    AttUrl = GetAttUrl(item.ProjectID) 
-                };
-                qinghuanList.Add(project);
-            }
-            //重缓
+                    ProjectID = f.ProjectID, 
+                    ProTitleShort = f.ProTitleShort,
+                    AttUrl = GetAttUrl(f.ProjectAtt) 
+                }).ToList();
+            #endregion
+
+            #region//重缓
             var zhonghuan = projectList
                 .Where(f => f.ImpropantWeight == 1 && f.UrgentWeight == 0)
-                .Select(f => new { ProjectID = f.ProjectID, ProTitleShort = f.ProTitleShort })
-                .ToList();
-            foreach (var item in zhonghuan)
-            {
-                var project = new GetProjectAllModel 
+                .Select(f => new 
                 { 
-                    ProjectID = item.ProjectID, 
-                    ProTitleShort = item.ProTitleShort, 
-                    AttUrl = GetAttUrl(item.ProjectID) 
-                };
-                zhonghuanList.Add(project);
-            }
-            //轻急
+                    ProjectID = f.ProjectID, 
+                    ProTitleShort = f.ProTitleShort,
+                    AttUrl = GetAttUrl(f.ProjectAtt) 
+                }).ToList();
+            #endregion
+
+            #region//轻急
             var qingji = projectList
                 .Where(f => f.ImpropantWeight == 0 && f.UrgentWeight == 1)
-                .Select(f => new { ProjectID = f.ProjectID, ProTitleShort = f.ProTitleShort })
-                .ToList();
-            foreach (var item in qingji)
-            {
-                var project = new GetProjectAllModel 
+                .Select(f => new 
                 { 
-                    ProjectID = item.ProjectID, 
-                    ProTitleShort = item.ProTitleShort, 
-                    AttUrl = GetAttUrl(item.ProjectID) 
-                };
-                qingjiList.Add(project);
-            }
-            //重急
+                    ProjectID = f.ProjectID, 
+                    ProTitleShort = f.ProTitleShort,
+                    AttUrl = GetAttUrl(f.ProjectAtt) 
+                }).ToList();
+            #endregion
+
+            #region//重急
             var zhongji = projectList
                 .Where(f => f.ImpropantWeight == 1 && f.UrgentWeight == 1)
-                .Select(f => new { ProjectID = f.ProjectID, ProTitleShort = f.ProTitleShort })
-                .ToList();
-            foreach (var item in zhongji)
-            {
-                var project = new GetProjectAllModel 
+                .Select(f => new 
                 { 
-                    ProjectID = item.ProjectID, 
-                    ProTitleShort = item.ProTitleShort, 
-                    AttUrl = GetAttUrl(item.ProjectID) 
-                };
-                zhongjiList.Add(project);
-            }
+                    ProjectID = f.ProjectID, 
+                    ProTitleShort = f.ProTitleShort,
+                    AttUrl = GetAttUrl(f.ProjectAtt) 
+                }).ToList();
+            #endregion
 
-            var jsonData = new { qinghuanList, zhonghuanList, qingjiList, zhongjiList };
+            var jsonData = new { qinghuan, zhonghuan, qingji, zhongji };
 
             return Ok(jsonData);
         }

@@ -13,7 +13,7 @@ namespace HanHe.Web.Models
         /// <summary>
         /// 附件编号（更新附件必填）
         /// </summary>
-        public int AttID { get; set; }
+        public long AttID { get; set; }
         /// <summary>
         /// 会员编号（添加附件必填）
         /// </summary>
@@ -29,7 +29,7 @@ namespace HanHe.Web.Models
         /// <summary>
         /// 附件说明
         /// </summary>
-        public string AttInfo { get; set; }
+        //public string AttInfo { get; set; }
         /// <summary>
         /// 附件Url
         /// </summary>

@@ -59,6 +59,42 @@ namespace HanHe.DAL
                 .WithMany(t => t.FCAtt)
                 .HasForeignKey(d => d.FCID);
             #endregion
+
+            #region 传家和附件
+            modelBuilder.Entity<Zs_ChuanJia>()
+                .HasMany(t => t.ChuanJiaAtt)
+                .WithRequired(t => t.ChuanJia)
+                .HasForeignKey(d => d.CJID);
+
+            modelBuilder.Entity<Zs_ChuanJiaAtt>()
+                .HasRequired(t => t.ChuanJia)
+                .WithMany(t => t.ChuanJiaAtt)
+                .HasForeignKey(d => d.CJID);
+            #endregion
+
+            #region 感悟和附件
+            modelBuilder.Entity<Zs_GanWu>()
+                .HasMany(t => t.GanWuAtt)
+                .WithRequired(t => t.GanWu)
+                .HasForeignKey(d => d.GWID);
+
+            modelBuilder.Entity<Zs_GanWuAtt>()
+                .HasRequired(t => t.GanWu)
+                .WithMany(t => t.GanWuAtt)
+                .HasForeignKey(d => d.GWID);
+            #endregion
+
+            #region 事历和附件
+            //modelBuilder.Entity<Zs_Project>()
+            //    .HasMany(t => t.ProjectAtt)
+            //    .WithRequired(t => t.Project)
+            //    .HasForeignKey(d => d.ProjectID);
+
+            //modelBuilder.Entity<Zs_ProjectAtt>()
+            //    .HasRequired(t => t.Project)
+            //    .WithMany(t => t.ProjectAtt)
+            //    .HasForeignKey(d => d.ProjectID);
+            #endregion
         }
 
         public DbSet<Zs_ChuanJia> Zs_ChuanJia { get; set; }

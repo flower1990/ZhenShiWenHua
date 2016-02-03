@@ -67,5 +67,9 @@ namespace HanHe.Model
         /// 点赞计数
         /// </summary>		
         public int GoodCount { get; set; }
+        /// <summary>
+        /// 传家附件列表
+        /// </summary>
+        public virtual ICollection<Zs_ChuanJiaAtt> ChuanJiaAtt { get; set; }
     }
 }

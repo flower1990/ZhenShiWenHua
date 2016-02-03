@@ -26,6 +26,10 @@ namespace HanHe.Model
         /// </summary>		
         public long GWID { get; set; }
         /// <summary>
+        /// 感悟信息
+        /// </summary>
+        public virtual Zs_GanWu GanWu { get; set; }
+        /// <summary>
         /// 附件标题
         /// </summary>		
         public string AttTitle { get; set; }

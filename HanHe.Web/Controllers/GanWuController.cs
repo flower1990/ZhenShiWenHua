@@ -27,14 +27,24 @@ namespace HanHe.Web.Controllers
         /// <summary>
         /// 获取附件地址
         /// </summary>
-        /// <param name="projectID"></param>
-        /// <returns></returns>
+        /// <param name="gwID">感悟编号</param>
+        /// <returns>感悟附件</returns>
         public string GetAttUrl(long gwID)
         {
             var attList = bGanWuAtt.Find(s => s.AttType == 1 && s.GWID == gwID);
             if (attList == null) return "";
 
             return attList.AttUrl;
+        }
+        /// <summary>
+        /// 获取附件图片
+        /// </summary>
+        /// <param name="att"></param>
+        /// <returns></returns>
+        private string GetAttUrl(ICollection<Zs_GanWuAtt> att)
+        {
+            if (att.Count == 0) return "";
+            return att.Where(f => f.AttType == 1).FirstOrDefault().AttUrl;
         }
         /// <summary>
         /// 更新附件列表
@@ -144,6 +154,7 @@ namespace HanHe.Web.Controllers
                 return Ok();
             }
         }
+        
         /// <summary>
         /// 获取感悟未来列表
         /// </summary>
@@ -152,74 +163,54 @@ namespace HanHe.Web.Controllers
         [HttpGet, Route("GetByMID")]
         public IHttpActionResult GetGanWuAll([FromUri]long mid)
         {
-            var ganwuList = new List<GetGanWuAllModel>();
-            var dreamList = new List<GetGanWuAllModel>();
-            var dashiList = new List<GetGanWuAllModel>();
-            var weilaiList = new List<GetGanWuAllModel>();
-            
-            var ganWuList = bGanWu.Entities.Where(f => f.MID == mid);
-            //感悟
+            //感悟列表   
+            var ganWuList = bGanWu.Entities.Where(f => f.MID == mid).ToList();
+
+            #region//感悟
             var ganwu = ganWuList
                 .Where(f => f.GwType == 1)
-                .Select(f => new { GwID = f.GwID, GwTitleShort = f.GwTitleShort })
-                .ToList();
-            foreach (var item in ganwu)
-            {
-                var entity = new GetGanWuAllModel
-                {
-                    GwID = item.GwID,
-                    GwTitleShort = item.GwTitleShort,
-                    AttUrl = GetAttUrl(item.GwID)
-                };
-                ganwuList.Add(entity);
-            }
-            //梦想心愿
+                .Select(f => new 
+                { 
+                    GwID = f.GwID, 
+                    GwTitleShort = f.GwTitleShort,
+                    AttUrl = GetAttUrl(f.GanWuAtt),
+                }).ToList();
+            #endregion
+
+            #region//梦想心愿
             var dream = ganWuList
                 .Where(f => f.GwType == 2)
-                .Select(f => new { GwID = f.GwID, GwTitleShort = f.GwTitleShort })
-                .ToList();
-            foreach (var item in ganwu)
-            {
-                var entity = new GetGanWuAllModel
-                {
-                    GwID = item.GwID,
-                    GwTitleShort = item.GwTitleShort,
-                    AttUrl = GetAttUrl(item.GwID)
-                };
-                dreamList.Add(entity);
-            }
-            //大事
+                .Select(f => new 
+                { 
+                    GwID = f.GwID,
+                    GwTitleShort = f.GwTitleShort,
+                    AttUrl = GetAttUrl(f.GanWuAtt)
+                }).ToList();
+            #endregion
+
+            #region//大事
             var dashi = ganWuList
                 .Where(f => f.GwType == 3)
-                .Select(f => new { GwID = f.GwID, GwTitleShort = f.GwTitleShort })
-                .ToList();
-            foreach (var item in ganwu)
-            {
-                var entity = new GetGanWuAllModel
-                {
-                    GwID = item.GwID,
-                    GwTitleShort = item.GwTitleShort,
-                    AttUrl = GetAttUrl(item.GwID)
-                };
-                dashiList.Add(entity);
-            }
-            //未来的信
+                .Select(f => new 
+                { 
+                    GwID = f.GwID, 
+                    GwTitleShort = f.GwTitleShort,
+                    AttUrl = GetAttUrl(f.GanWuAtt)
+                }).ToList();
+            #endregion
+
+            #region//未来的信
             var weilai = ganWuList
                 .Where(f => f.GwType == 4)
-                .Select(f => new { GwID = f.GwID, GwTitleShort = f.GwTitleShort })
-                .ToList();
-            foreach (var item in ganwu)
-            {
-                var entity = new GetGanWuAllModel
-                {
-                    GwID = item.GwID,
-                    GwTitleShort = item.GwTitleShort,
-                    AttUrl = GetAttUrl(item.GwID)
-                };
-                weilaiList.Add(entity);
-            }
+                .Select(f => new 
+                { 
+                    GwID = f.GwID, 
+                    GwTitleShort = f.GwTitleShort,
+                    AttUrl = GetAttUrl(f.GanWuAtt)
+                }).ToList();
+            #endregion
 
-            var jsonData = new { ganWuList, dreamList, dashiList, weilaiList };
+            var jsonData = new { ganwu, dream, dashi, weilai };
 
             return Ok(jsonData);
         }

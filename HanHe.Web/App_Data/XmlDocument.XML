@@ -624,6 +624,13 @@
             <param name="cjID">传家编号</param>
             <returns></returns>
         </member>
+        <member name="M:HanHe.Web.Controllers.ChuanJiaController.GetAttUrl(System.Collections.Generic.ICollection{HanHe.Model.Zs_ChuanJiaAtt})">
+            <summary>
+            获取附件图片
+            </summary>
+            <param name="att"></param>
+            <returns></returns>
+        </member>
         <member name="M:HanHe.Web.Controllers.ChuanJiaController.UpdateAttList(HanHe.Model.Zs_ChuanJia)">
             <summary>
             更新附件列表
@@ -717,7 +724,14 @@
             <summary>
             获取附件地址
             </summary>
-            <param name="projectID"></param>
+            <param name="gwID">感悟编号</param>
+            <returns>感悟附件</returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.GanWuController.GetAttUrl(System.Collections.Generic.ICollection{HanHe.Model.Zs_GanWuAtt})">
+            <summary>
+            获取附件图片
+            </summary>
+            <param name="att"></param>
             <returns></returns>
         </member>
         <member name="M:HanHe.Web.Controllers.GanWuController.UpdateAttList(HanHe.Model.Zs_GanWu)">
@@ -904,6 +918,13 @@
             行事历附件
             </summary>
         </member>
+        <member name="M:HanHe.Web.Controllers.ProjectAttController.ToJosnData(System.Object)">
+            <summary>
+            对实体类进行json序列化
+            </summary>
+            <param name="item">实体类对象</param>
+            <returns>json格式字符串</returns>
+        </member>
         <member name="M:HanHe.Web.Controllers.ProjectAttController.AddOrUpdateProjectAtt">
             <summary>
             添加或更新附件（添加传MID，更新传AttID）
@@ -927,6 +948,13 @@
             获取附件地址
             </summary>
             <param name="projectID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HanHe.Web.Controllers.ProjectController.GetAttUrl(System.Collections.Generic.ICollection{HanHe.Model.Zs_ProjectAtt})">
+            <summary>
+            获取附件图片
+            </summary>
+            <param name="att"></param>
             <returns></returns>
         </member>
         <member name="M:HanHe.Web.Controllers.ProjectController.UpdateAttList(HanHe.Model.Zs_Project)">
@@ -1093,6 +1121,121 @@
         <member name="P:HanHe.Web.Models.UpdateChuanJiaModel.UpdateDate">
             <summary>
             更新日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.CJID">
+            <summary>
+            CJID
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.MID">
+            <summary>
+            会员ID
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.TypeID">
+            <summary>
+            传家类别：1.墓志铭2.家训3.遗训4.文化传承；
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.CJTitle">
+            <summary>
+            传家标题
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.CJTitleShort">
+            <summary>
+            短标题
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.CJInfo">
+            <summary>
+            传家内容
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.OpenStatus">
+            <summary>
+            公开状态：0、私隐；1、公开；2、好友可见
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.OpenStatusName">
+            <summary>
+            公开状态名称
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.SortID">
+            <summary>
+            排序字段：倒序排列
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.CreateDate">
+            <summary>
+            创建日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.UpdateDate">
+            <summary>
+            更新日期
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.ViewCount">
+            <summary>
+            浏览计数
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJia.GoodCount">
+            <summary>
+            点赞计数
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.AttID">
+            <summary>
+            AttID
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.MID">
+            <summary>
+            会员编号
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.CJID">
+            <summary>
+            传家ID
+            </summary>
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.AttTitle">
+            <summary>
+            附件标题
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.AttInfo">
+            <summary>
+            附件说明
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.AttUrl">
+            <summary>
+            附件Url
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.AttType">
+            <summary>
+            附件类别1.图片2.视频3.音频4.文档
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.AttTypeName">
+            <summary>
+            附件类别名称
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.SortID">
+            <summary>
+            排序字段，升序
+            </summary>		
+        </member>
+        <member name="P:HanHe.Web.Models.ChuanJiaAtt.CreateDate">
+            <summary>
+            创建日期
             </summary>		
         </member>
         <member name="P:HanHe.Web.Models.FCircleCreate.MID">
@@ -1568,11 +1711,6 @@
         <member name="P:HanHe.Web.Models.ProjectAttModel.AttTitle">
             <summary>
             附件标题
-            </summary>
-        </member>
-        <member name="P:HanHe.Web.Models.ProjectAttModel.AttInfo">
-            <summary>
-            附件说明
             </summary>
         </member>
         <member name="P:HanHe.Web.Models.ProjectAttModel.AttUrl">

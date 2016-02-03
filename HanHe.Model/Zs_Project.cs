@@ -90,13 +90,17 @@ namespace HanHe.Model
         /// </summary>		
         public DateTime UpdateDate { get; set; }
         /// <summary>
-        /// ViewCount
+        /// 浏览计数
         /// </summary>		
         public int ViewCount { get; set; }
         /// <summary>
-        /// GoodCount
+        /// 点赞计数
         /// </summary>		
         public int GoodCount { get; set; }
+        /// <summary>
+        /// 事历附件列表
+        /// </summary>
+        public virtual ICollection<Zs_ProjectAtt> ProjectAtt { get; set; }
 
     }
 }

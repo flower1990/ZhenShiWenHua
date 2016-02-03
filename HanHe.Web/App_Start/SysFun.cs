@@ -65,12 +65,14 @@ namespace HanHe.Web
                 //原始文件名
                 string orfilename = fileContent.Headers.ContentDisposition.FileName.TrimStart('"').TrimEnd('"');
                 if (string.IsNullOrEmpty(orfilename)) continue;
+                //文件名称
+                string fileName = Path.GetFileNameWithoutExtension(orfilename);
                 //文件扩展名
                 string fileExt = Path.GetExtension(orfilename);
                 //文件类型1.图片2.视频3.音频4.文档5.flash
                 string fileType = GetFileType(orfilename);
                 //文件标题
-                string fileTitle = GetFileTitle(orfilename);
+                string fileTitle = GetFileTitle(fileName);
                 //文件保存目录路径
                 string dirTempPath = GetDestDir(fileType);
                 //文件url路径
@@ -86,7 +88,13 @@ namespace HanHe.Web
                 //保存到指定路径
                 using (StreamWriter sw = new StreamWriter(destFileName)) { stream.CopyTo(sw.BaseStream); sw.Flush(); }
                 //添加到文件集合
-                fileList.Add(new FileDataInfo() { AttType = int.Parse(fileType), AttTitle = fileTitle, AttUrl = urlFileName, AttInfo = "" });
+                fileList.Add(new FileDataInfo() 
+                { 
+                    AttType = int.Parse(fileType), 
+                    AttTitle = fileTitle, 
+                    AttUrl = urlFileName, 
+                    AttInfo = "" 
+                });
             }
             //遍历表单数据
             foreach (var key in provider.FormData.AllKeys)

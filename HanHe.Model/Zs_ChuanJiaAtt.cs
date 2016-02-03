@@ -25,6 +25,10 @@ namespace HanHe.Model
         /// </summary>
         public long CJID { get; set; }
         /// <summary>
+        /// 传家信息
+        /// </summary>
+        public virtual Zs_ChuanJia ChuanJia { get; set; }
+        /// <summary>
         /// 附件标题
         /// </summary>		
         public string AttTitle { get; set; }

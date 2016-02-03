@@ -5,9 +5,11 @@ using HanHe.Web.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -22,7 +24,26 @@ namespace HanHe.Web.Controllers
         SysFun sysFun = new SysFun();
         IZs_Project bProject = new BZs_Project();
         IZs_ProjectAtt bProjectAtt = new BZs_ProjectAtt();
-
+        /// <summary>
+        /// 对实体类进行json序列化
+        /// </summary>
+        /// <param name="item">实体类对象</param>
+        /// <returns>json格式字符串</returns>
+        public static string ToJosnData(object item)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(item.GetType());
+            string result = string.Empty;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, item);
+                ms.Position = 0;
+                using (StreamReader reader = new StreamReader(ms))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            return result;
+        }
         /// <summary>
         /// 添加或更新附件（添加传MID，更新传AttID）
         /// </summary>
@@ -69,7 +90,11 @@ namespace HanHe.Web.Controllers
                 }
             }
 
-            return Ok(projectAtt);
+            //var result = new { AttTitle = projectAtt.AttTitle };
+            ProjectAttModel result = new ProjectAttModel();
+            result = sysFun.InitialEntity<Zs_ProjectAtt, ProjectAttModel>(projectAtt, result);
+
+            return Ok(result);
         }
         /// <summary>
         /// 删除附件

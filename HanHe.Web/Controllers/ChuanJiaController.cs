@@ -13,6 +13,7 @@ using System.Web.Security;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace HanHe.Web.Controllers
 {
@@ -35,8 +36,18 @@ namespace HanHe.Web.Controllers
         {
             var attList = bChuanJiaAtt.Find(s => s.AttType == 1 && s.CJID == cjID);
             if (attList == null) return "";
-            
+
             return attList.AttUrl;
+        }
+        /// <summary>
+        /// 获取附件图片
+        /// </summary>
+        /// <param name="att"></param>
+        /// <returns></returns>
+        private string GetAttUrl(ICollection<Zs_ChuanJiaAtt> att)
+        {
+            if (att.Count == 0) return "";
+            return att.Where(f => f.AttType == 1).FirstOrDefault().AttUrl;
         }
         /// <summary>
         /// 更新附件列表
@@ -152,74 +163,54 @@ namespace HanHe.Web.Controllers
         [HttpGet, Route("GetByMID")]
         public IHttpActionResult GetChuanJiaAll([FromUri]long mid)
         {
-            var muzhiList = new List<GetChuanJiaAllModel>();
-            var jiaxunList = new List<GetChuanJiaAllModel>();
-            var yixunList = new List<GetChuanJiaAllModel>();
-            var wenhuaList = new List<GetChuanJiaAllModel>();
-            
-            var chuanJiaList = bChuanJia.Entities.Where(f => f.MID == mid);
-            //墓志铭
+            //传家列表
+            var chuanJiaList = bChuanJia.Entities.Where(f => f.MID == mid).ToList();
+
+            #region//墓志铭
             var muzhi = chuanJiaList
                 .Where(f => f.TypeID == 1)
-                .Select(f => new { CJID = f.CJID, CJTitleShort = f.CJTitleShort })
-                .ToList();
-            foreach (var item in muzhi)
-            {
-                var entity = new GetChuanJiaAllModel
+                .Select(f => new
                 {
-                    CJID = item.CJID,
-                    CJTitleShort = item.CJTitleShort,
-                    AttUrl = GetAttUrl(item.CJID)
-                };
-                muzhiList.Add(entity);
-            }
-            //遗训
-            var yixun = chuanJiaList
-                .Where(f => f.TypeID == 2)
-                .Select(f => new { CJID = f.CJID, CJTitleShort = f.CJTitleShort })
-                .ToList();
-            foreach (var item in yixun)
-            {
-                var entity = new GetChuanJiaAllModel
-                {
-                    CJID = item.CJID,
-                    CJTitleShort = item.CJTitleShort,
-                    AttUrl = GetAttUrl(item.CJID)
-                };
-                yixunList.Add(entity);
-            }
-            //感悟
-            var wenhua = chuanJiaList
-                .Where(f => f.TypeID == 3)
-                .Select(f => new { CJID = f.CJID, CJTitleShort = f.CJTitleShort })
-                .ToList();
-            foreach (var item in wenhua)
-            {
-                var entity = new GetChuanJiaAllModel
-                {
-                    CJID = item.CJID,
-                    CJTitleShort = item.CJTitleShort,
-                    AttUrl = GetAttUrl(item.CJID)
-                };
-                wenhuaList.Add(entity);
-            }
-            //感悟
-            var jaixun = chuanJiaList
-                .Where(f => f.TypeID == 4)
-                .Select(f => new { CJID = f.CJID, CJTitleShort = f.CJTitleShort })
-                .ToList();
-            foreach (var item in jaixun)
-            {
-                var entity = new GetChuanJiaAllModel
-                {
-                    CJID = item.CJID,
-                    CJTitleShort = item.CJTitleShort,
-                    AttUrl = GetAttUrl(item.CJID)
-                };
-                muzhiList.Add(entity);
-            }
+                    CJID = f.CJID,
+                    CJTitleShort = f.CJTitleShort,
+                    AttUrl = GetAttUrl(f.ChuanJiaAtt)
+                }).ToList();
+            #endregion
 
-            var jsonData = new { muzhiList, jiaxunList, yixunList, wenhuaList };
+            #region//家训
+            var jiaxun = chuanJiaList
+                .Where(f => f.TypeID == 2)
+                .Select(f => new
+                {
+                    CJID = f.CJID,
+                    CJTitleShort = f.CJTitleShort,
+                    AttUrl = GetAttUrl(f.ChuanJiaAtt)
+                }).ToList();
+            #endregion
+
+            #region//遗训
+            var yixun = chuanJiaList
+                .Where(f => f.TypeID == 3)
+                .Select(f => new
+                {
+                    CJID = f.CJID,
+                    CJTitleShort = f.CJTitleShort,
+                    AttUrl = GetAttUrl(f.ChuanJiaAtt)
+                }).ToList();
+            #endregion
+
+            #region//文化传承
+            var wenhua = chuanJiaList
+                .Where(f => f.TypeID == 4)
+                .Select(f => new
+                {
+                    CJID = f.CJID,
+                    CJTitleShort = f.CJTitleShort,
+                    AttUrl = GetAttUrl(f.ChuanJiaAtt)
+                }).ToList();
+            #endregion
+
+            var jsonData = new { muzhi, jiaxun, yixun, wenhua };
 
             return Ok(jsonData);
         }
@@ -232,14 +223,38 @@ namespace HanHe.Web.Controllers
         public IHttpActionResult GetChuanJiaById([FromUri]long id)
         {
             var chuanJia = new Zs_ChuanJia();
-            var chuanJiaAtt = new List<Zs_ChuanJiaAtt>();
-            var result = new List<ChuanJiaViewModel>();
+            var chuanJiaAtt = new List<ChuanJiaAtt>();
+            var vmChuanJia = new ChuanJia();
+            var vmChuanJiaAtt = new ChuanJiaAtt();
+            var result = new ChuanJiaViewModel1();
 
             chuanJia = bChuanJia.Find(id);
-            chuanJiaAtt = bChuanJiaAtt.Entities.Where(f => f.CJID == chuanJia.CJID).ToList();
-            result.Add(new ChuanJiaViewModel() { ChuanJia = chuanJia, ChuanJiaAtt = chuanJiaAtt });
+            vmChuanJia = sysFun.InitialEntity<Zs_ChuanJia, ChuanJia>(chuanJia, vmChuanJia);
+            foreach (var item in chuanJia.ChuanJiaAtt)
+            {
+                vmChuanJiaAtt = sysFun.InitialEntity<Zs_ChuanJiaAtt, ChuanJiaAtt>(item, vmChuanJiaAtt);
+                chuanJiaAtt.Add(vmChuanJiaAtt);
+            }
+            result.ChuanJia = vmChuanJia;
+            result.ChuanJiaAtt = chuanJiaAtt;
 
-            return Ok(result);
+            //var result = bChuanJia.Entities
+            //    .Where(f => f.CJID == id)
+            //    .Select(f => new
+            //    {
+            //        ChuanJia = new
+            //        {
+            //            CJID = f.CJID,
+            //            CJTitleShort = f.CJTitleShort
+            //        },
+            //        ChuanJiaAtt = f.ChuanJiaAtt.Select(s => new
+            //        {
+            //            AttID = s.AttID,
+            //            AttTitle = s.AttTitle
+            //        })
+            //    });
+            
+            return Json(result);
         }
     }
 }

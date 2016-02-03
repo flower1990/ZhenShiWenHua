@@ -22,9 +22,13 @@ namespace HanHe.Model
         /// </summary>
         public long MID { get; set; }
         /// <summary>
-        /// 项目ID
+        /// 事历编号
         /// </summary>		
         public long ProjectID { get; set; }
+        /// <summary>
+        /// 事历信息
+        /// </summary>
+        public virtual Zs_Project Project { get; set; }
         /// <summary>
         /// 附件标题
         /// </summary>		

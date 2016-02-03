@@ -97,6 +97,10 @@ namespace HanHe.Model
         /// 点赞计数
         /// </summary>		
         public int GoodCount { get; set; }
+        /// <summary>
+        /// 感悟集合
+        /// </summary>
+        public virtual ICollection<Zs_GanWuAtt> GanWuAtt { get; set; }
 
     }
 }
